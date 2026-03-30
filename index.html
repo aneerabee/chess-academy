@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>أكاديمية الشطرنج — تعلّم الشطرنج من الصفر حتى الاحتراف</title>
+<meta name="description" content="دليل شطرنج شامل بالعربي — 6 مراحل تأخذك من الصفر إلى مستوى يُربك خصومك. تفاعلي، مجاني، بدون تسجيل.">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #080810;
+  --card: #10101c;
+  --gold: #d4a843;
+  --gold-dim: #9a7830;
+  --gold-glow: rgba(212,168,67,0.12);
+  --silver: #8a9bb0;
+  --text: #e8e4dd;
+  --text-dim: #5a5650;
+  --r: 16px;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Tajawal',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; overflow-x:hidden; }
+
+/* grain */
+body::before { content:''; position:fixed; inset:0; opacity:.025;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events:none; z-index:999; }
+
+.wrap { max-width:680px; margin:0 auto; padding:0 20px 80px; }
+
+/* ── HERO ── */
+.hero { text-align:center; padding:64px 0 48px; position:relative; }
+.hero-board {
+  font-size:72px; display:block; margin-bottom:20px;
+  animation: float 4s ease-in-out infinite;
+  filter: drop-shadow(0 0 40px rgba(212,168,67,0.3));
+}
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+
+.badge {
+  display:inline-block; font-size:10px; letter-spacing:3px; text-transform:uppercase;
+  color:var(--gold); background:var(--gold-glow); padding:5px 16px;
+  border-radius:20px; border:1px solid rgba(212,168,67,0.2); margin-bottom:20px;
+}
+.hero h1 {
+  font-family:'Amiri',serif; font-size:clamp(2em,6vw,3.2em);
+  color:var(--text); font-weight:700; line-height:1.2; margin-bottom:14px;
+}
+.hero h1 span { color:var(--gold); }
+.hero p { color:var(--silver); font-size:1.05em; font-weight:300; line-height:1.8; max-width:480px; margin:0 auto 32px; }
+
+/* ── CTA BUTTONS ── */
+.cta-group { display:flex; flex-direction:column; gap:12px; align-items:center; }
+.btn-primary {
+  display:inline-flex; align-items:center; gap:10px;
+  background:linear-gradient(135deg,var(--gold-dim),var(--gold));
+  color:#0a0a0f; font-family:'Tajawal',sans-serif; font-weight:700;
+  font-size:1.1em; padding:16px 36px; border-radius:50px; border:none;
+  cursor:pointer; text-decoration:none; transition:all .3s;
+  box-shadow:0 4px 30px rgba(212,168,67,0.25);
+}
+.btn-primary:hover { transform:translateY(-2px); box-shadow:0 8px 40px rgba(212,168,67,0.4); }
+.btn-secondary {
+  display:inline-flex; align-items:center; gap:8px;
+  color:var(--silver); font-family:'Tajawal',sans-serif; font-size:.9em;
+  text-decoration:none; padding:10px 20px; border-radius:30px;
+  border:1px solid rgba(255,255,255,0.07); background:rgba(255,255,255,0.02);
+  transition:all .3s; cursor:pointer;
+}
+.btn-secondary:hover { color:var(--text); border-color:rgba(255,255,255,0.15); }
+
+/* ── STATS ── */
+.stats { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:48px 0; }
+.stat {
+  background:var(--card); border:1px solid rgba(255,255,255,0.04);
+  border-radius:var(--r); padding:20px 12px; text-align:center;
+}
+.stat-v { font-size:1.8em; font-weight:700; color:var(--gold); font-family:'Amiri',serif; }
+.stat-l { font-size:.78em; color:var(--text-dim); margin-top:4px; }
+
+/* ── PHASES ── */
+.section-title {
+  font-size:.7em; letter-spacing:3px; text-transform:uppercase;
+  color:var(--gold); text-align:center; margin-bottom:24px;
+}
+.phases { display:flex; flex-direction:column; gap:10px; margin-bottom:48px; }
+.phase {
+  background:var(--card); border:1px solid rgba(255,255,255,0.04);
+  border-radius:var(--r); padding:18px 20px;
+  display:flex; align-items:center; gap:16px;
+  transition:border-color .3s;
+}
+.phase:hover { border-color:rgba(212,168,67,0.15); }
+.phase-num {
+  width:34px; height:34px; border-radius:50%;
+  background:var(--gold-glow); border:1px solid rgba(212,168,67,0.2);
+  color:var(--gold); font-size:.85em; font-weight:700;
+  display:flex; align-items:center; justify-content:center; flex-shrink:0;
+}
+.phase-body { flex:1; }
+.phase-name { font-size:.95em; font-weight:600; color:var(--text); }
+.phase-sub { font-size:.78em; color:var(--text-dim); margin-top:3px; }
+.phase-tag {
+  font-size:.68em; padding:3px 10px; border-radius:10px;
+  background:var(--gold-glow); color:var(--gold);
+  border:1px solid rgba(212,168,67,0.15); white-space:nowrap;
+}
+
+/* ── TESTIMONIAL / QUOTE ── */
+.quote-block {
+  background:linear-gradient(135deg,#12121e,#0e0e1a);
+  border:1px solid rgba(212,168,67,0.1); border-right:3px solid var(--gold);
+  border-radius:0 var(--r) var(--r) 0; padding:24px 24px;
+  margin:40px 0; position:relative;
+}
+.quote-text { font-family:'Amiri',serif; font-size:1.15em; color:var(--text); line-height:1.8; }
+.quote-author { font-size:.8em; color:var(--gold-dim); margin-top:10px; }
+
+/* ── FOR WHO ── */
+.for-who { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:48px; }
+.for-item {
+  background:var(--card); border:1px solid rgba(255,255,255,0.04);
+  border-radius:var(--r); padding:16px 18px;
+  display:flex; align-items:flex-start; gap:12px;
+}
+.for-item-em { font-size:1.3em; margin-top:2px; }
+.for-item-text { font-size:.85em; color:var(--silver); line-height:1.6; }
+.for-item-text strong { color:var(--text); display:block; margin-bottom:3px; font-size:.95em; }
+
+/* ── FINAL CTA ── */
+.final-cta {
+  background:linear-gradient(135deg,#14142a,#1a1a30);
+  border:1px solid rgba(212,168,67,0.1); border-radius:20px;
+  padding:40px 30px; text-align:center;
+}
+.final-cta h2 { font-family:'Amiri',serif; font-size:1.7em; margin-bottom:10px; color:var(--gold); }
+.final-cta p { color:var(--silver); font-size:.9em; margin-bottom:24px; line-height:1.7; }
+
+/* ── FREE TAG ── */
+.free-tag {
+  display:inline-flex; align-items:center; gap:6px;
+  background:rgba(74,200,120,0.1); color:#4ac878;
+  border:1px solid rgba(74,200,120,0.2); border-radius:20px;
+  font-size:.75em; padding:4px 14px; margin-bottom:16px;
+}
+
+/* ── FOOTER ── */
+footer { text-align:center; padding:40px 0 20px; color:var(--text-dim); font-size:.78em; }
+footer a { color:var(--gold-dim); text-decoration:none; }
+
+@media(max-width:480px){
+  .stats { grid-template-columns:repeat(3,1fr); }
+  .for-who { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HERO -->
+  <section class="hero">
+    <span class="hero-board">♟️</span>
+    <div class="badge">دليل الشطرنج العربي</div>
+    <h1>تعلّم الشطرنج<br><span>بشكل صحيح</span></h1>
+    <p>6 مراحل منظمة تأخذك من لا تعرف كيف تحرك القطع، إلى لاعب يفكر بعمق ويربح بثقة.</p>
+    <div class="cta-group">
+      <a href="app.html" class="btn-primary">♟ ابدأ الآن — مجاناً</a>
+      <a href="#phases" class="btn-secondary">↓ ما الذي ستتعلمه؟</a>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat"><div class="stat-v">6</div><div class="stat-l">مراحل تعليمية</div></div>
+    <div class="stat"><div class="stat-v">٣٠+</div><div class="stat-l">مفهوم وتكتيك</div></div>
+    <div class="stat"><div class="stat-v">٠ ر.س</div><div class="stat-l">مجاني تماماً</div></div>
+  </div>
+
+  <!-- PHASES -->
+  <div id="phases">
+    <div class="section-title">المنهج الكامل</div>
+    <div class="phases">
+      <div class="phase">
+        <div class="phase-num">١</div>
+        <div class="phase-body">
+          <div class="phase-name">الرقعة ليست مسطحة</div>
+          <div class="phase-sub">تعلّم تراها بعيون قائد — السيطرة على المركز</div>
+        </div>
+        <div class="phase-tag">الأساس</div>
+      </div>
+      <div class="phase">
+        <div class="phase-num">٢</div>
+        <div class="phase-body">
+          <div class="phase-name">أول ١٠ نقلات</div>
+          <div class="phase-sub">خطة واضحة بدل العشوائية — مبادئ الافتتاح</div>
+        </div>
+        <div class="phase-tag">الافتتاح</div>
+      </div>
+      <div class="phase">
+        <div class="phase-num">٣</div>
+        <div class="phase-body">
+          <div class="phase-name">التكتيكات — اربح قطعاً مجاناً</div>
+          <div class="phase-sub">الشوكة، التسمير، الكشف — أسلحة تغير المباريات</div>
+        </div>
+        <div class="phase-tag">الأسلحة</div>
+      </div>
+      <div class="phase">
+        <div class="phase-num">٤</div>
+        <div class="phase-body">
+          <div class="phase-name">وسط اللعبة</div>
+          <div class="phase-sub">فكّر كقائد لا كجندي — الخطط الاستراتيجية</div>
+        </div>
+        <div class="phase-tag">العقل</div>
+      </div>
+      <div class="phase">
+        <div class="phase-num">٥</div>
+        <div class="phase-body">
+          <div class="phase-name">نهايات اللعب</div>
+          <div class="phase-sub">حيث تُصنع الانتصارات — تحويل الأفضلية لفوز</div>
+        </div>
+        <div class="phase-tag">الختام</div>
+      </div>
+      <div class="phase">
+        <div class="phase-num">٦</div>
+        <div class="phase-body">
+          <div class="phase-name">خارطة طريقك</div>
+          <div class="phase-sub">من اليوم حتى تصبح لاعباً حقيقياً — روتين التطوير</div>
+        </div>
+        <div class="phase-tag">المسار</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUOTE -->
+  <div class="quote-block">
+    <div class="quote-text">«في الافتتاح تتعلم درساً، في وسط اللعب تخوض معركة، في النهاية تكسب لعبة»</div>
+    <div class="quote-author">— حكمة شطرنجية</div>
+  </div>
+
+  <!-- FOR WHO -->
+  <div class="section-title">لمن هذا الدليل؟</div>
+  <div class="for-who">
+    <div class="for-item">
+      <div class="for-item-em">🌱</div>
+      <div class="for-item-text"><strong>المبتدئ الكامل</strong>لم تلعب الشطرنج قط أو جربته عشوائياً</div>
+    </div>
+    <div class="for-item">
+      <div class="for-item-em">📈</div>
+      <div class="for-item-text"><strong>يريد تحسين مستواه</strong>يلعب لكنه لا يعرف لماذا يخسر</div>
+    </div>
+    <div class="for-item">
+      <div class="for-item-em">⏱️</div>
+      <div class="for-item-text"><strong>وقته محدود</strong>دليل مركّز — بلا حشو ولا نظريات معقدة</div>
+    </div>
+    <div class="for-item">
+      <div class="for-item-em">🧠</div>
+      <div class="for-item-text"><strong>يحب التفكير المنظم</strong>الشطرنج يطوّر التخطيط والتحليل</div>
+    </div>
+  </div>
+
+  <!-- FINAL CTA -->
+  <div class="final-cta">
+    <div class="free-tag">✓ مجاني — لا تسجيل — لا إعلانات</div>
+    <h2>ابدأ رحلتك الآن</h2>
+    <p>الدليل كامل ومتاح مباشرة.<br>تتبع تقدمك بين المراحل من نفس المتصفح.</p>
+    <a href="app.html" class="btn-primary">♟ افتح الدليل التفاعلي</a>
+  </div>
+
+  <footer>
+    بُني بـ ❤ · <a href="https://github.com/aneerabee/chess-academy" target="_blank">GitHub</a>
+  </footer>
+
+</div>
+</body>
+</html>
