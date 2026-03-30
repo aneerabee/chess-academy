@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chess Academy &mdash; Learn Chess the Right Way</title>
+<meta name="description" content="A comprehensive chess course in English. 6 structured phases take you from absolute beginner to confident player. Free preview available.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #080810;
+  --card: #10101c;
+  --gold: #d4a843;
+  --gold-dim: #9a7830;
+  --gold-glow: rgba(212,168,67,0.12);
+  --silver: #8a9bb0;
+  --text: #e8e4dd;
+  --text-dim: #5a5650;
+  --r: 16px;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Inter',system-ui,-apple-system,sans-serif; background:var(--bg); color:var(--text); min-height:100vh; overflow-x:hidden; }
+
+body::before { content:''; position:fixed; inset:0; opacity:.025;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events:none; z-index:999; }
+
+.wrap { max-width:680px; margin:0 auto; padding:0 20px 80px; }
+
+/* HERO */
+.hero { text-align:center; padding:64px 0 48px; position:relative; }
+.hero-board {
+  font-size:72px; display:block; margin-bottom:20px;
+  animation: float 4s ease-in-out infinite;
+  filter: drop-shadow(0 0 40px rgba(212,168,67,0.3));
+}
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+
+.badge {
+  display:inline-block; font-size:10px; letter-spacing:3px; text-transform:uppercase;
+  color:var(--gold); background:var(--gold-glow); padding:5px 16px;
+  border-radius:20px; border:1px solid rgba(212,168,67,0.2); margin-bottom:20px;
+}
+.hero h1 {
+  font-family:'Playfair Display',serif; font-size:clamp(2em,6vw,3.2em);
+  color:var(--text); font-weight:700; line-height:1.2; margin-bottom:14px;
+}
+.hero h1 span { color:var(--gold); }
+.hero p { color:var(--silver); font-size:1.05em; font-weight:300; line-height:1.8; max-width:500px; margin:0 auto 32px; }
+
+/* CTA */
+.cta-group { display:flex; flex-direction:column; gap:12px; align-items:center; }
+.btn-primary {
+  display:inline-flex; align-items:center; gap:10px;
+  background:linear-gradient(135deg,var(--gold-dim),var(--gold));
+  color:#0a0a0f; font-family:'Inter',sans-serif; font-weight:700;
+  font-size:1.1em; padding:16px 36px; border-radius:50px; border:none;
+  cursor:pointer; text-decoration:none; transition:all .3s;
+  box-shadow:0 4px 30px rgba(212,168,67,0.25);
+}
+.btn-primary:hover { transform:translateY(-2px); box-shadow:0 8px 40px rgba(212,168,67,0.4); }
+.btn-secondary {
+  display:inline-flex; align-items:center; gap:8px;
+  color:var(--silver); font-family:'Inter',sans-serif; font-size:.9em;
+  text-decoration:none; padding:10px 20px; border-radius:30px;
+  border:1px solid rgba(255,255,255,0.07); background:rgba(255,255,255,0.02);
+  transition:all .3s; cursor:pointer;
+}
+.btn-secondary:hover { color:var(--text); border-color:rgba(255,255,255,0.15); }
+
+/* STATS */
+.stats { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:48px 0; }
+.stat {
+  background:var(--card); border:1px solid rgba(255,255,255,0.04);
+  border-radius:var(--r); padding:20px 12px; text-align:center;
+}
+.stat-v { font-size:1.8em; font-weight:700; color:var(--gold); font-family:'Playfair Display',serif; }
+.stat-l { font-size:.78em; color:var(--text-dim); margin-top:4px; }
+
+/* PHASES */
+.section-title {
+  font-size:.7em; letter-spacing:3px; text-transform:uppercase;
+  color:var(--gold); text-align:center; margin-bottom:24px;
+}
+.phases { display:flex; flex-direction:column; gap:10px; margin-bottom:48px; }
+.phase {
+  background:var(--card); border:1px solid rgba(255,255,255,0.04);
+  border-radius:var(--r); padding:18px 20px;
+  display:flex; align-items:center; gap:16px;
+  transition:border-color .3s;
+}
+.phase:hover { border-color:rgba(212,168,67,0.15); }
+.phase-num {
+  width:34px; height:34px; border-radius:50%;
+  background:var(--gold-glow); border:1px solid rgba(212,168,67,0.2);
+  color:var(--gold); font-size:.85em; font-weight:700;
+  display:flex; align-items:center; justify-content:center; flex-shrink:0;
+}
+.phase-body { flex:1; }
+.phase-name { font-size:.95em; font-weight:600; color:var(--text); }
+.phase-sub { font-size:.78em; color:var(--text-dim); margin-top:3px; }
+.phase-tag {
+  font-size:.68em; padding:3px 10px; border-radius:10px;
+  background:var(--gold-glow); color:var(--gold);
+  border:1px solid rgba(212,168,67,0.15); white-space:nowrap;
+}
+
+/* QUOTE */
+.quote-block {
+  background:linear-gradient(135deg,#12121e,#0e0e1a);
+  border:1px solid rgba(212,168,67,0.1); border-left:3px solid var(--gold);
+  border-radius:var(--r) 0 0 var(--r); padding:24px 24px;
+  margin:40px 0; position:relative;
+}
+.quote-text { font-family:'Playfair Display',serif; font-size:1.15em; color:var(--text); line-height:1.8; }
+.quote-author { font-size:.8em; color:var(--gold-dim); margin-top:10px; }
+
+/* FEATURES */
+.features { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:48px; }
+.feature-item {
+  background:var(--card); border:1px solid rgba(255,255,255,0.04);
+  border-radius:var(--r); padding:16px 18px;
+  display:flex; align-items:flex-start; gap:12px;
+}
+.feature-em { font-size:1.3em; margin-top:2px; }
+.feature-text { font-size:.85em; color:var(--silver); line-height:1.6; }
+.feature-text strong { color:var(--text); display:block; margin-bottom:3px; font-size:.95em; }
+
+/* FOR WHO */
+.for-who { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:48px; }
+.for-item {
+  background:var(--card); border:1px solid rgba(255,255,255,0.04);
+  border-radius:var(--r); padding:16px 18px;
+  display:flex; align-items:flex-start; gap:12px;
+}
+.for-item-em { font-size:1.3em; margin-top:2px; }
+.for-item-text { font-size:.85em; color:var(--silver); line-height:1.6; }
+.for-item-text strong { color:var(--text); display:block; margin-bottom:3px; font-size:.95em; }
+
+/* FINAL CTA */
+.final-cta {
+  background:linear-gradient(135deg,#14142a,#1a1a30);
+  border:1px solid rgba(212,168,67,0.1); border-radius:20px;
+  padding:40px 30px; text-align:center;
+}
+.final-cta h2 { font-family:'Playfair Display',serif; font-size:1.7em; margin-bottom:10px; color:var(--gold); }
+.final-cta p { color:var(--silver); font-size:.9em; margin-bottom:24px; line-height:1.7; }
+
+/* FREE TAG */
+.free-tag {
+  display:inline-flex; align-items:center; gap:6px;
+  background:rgba(74,200,120,0.1); color:#4ac878;
+  border:1px solid rgba(74,200,120,0.2); border-radius:20px;
+  font-size:.75em; padding:4px 14px; margin-bottom:16px;
+}
+
+footer { text-align:center; padding:40px 0 20px; color:var(--text-dim); font-size:.78em; }
+footer a { color:var(--gold-dim); text-decoration:none; }
+
+@media(max-width:480px){
+  .stats { grid-template-columns:repeat(3,1fr); }
+  .for-who, .features { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HERO -->
+  <section class="hero">
+    <span class="hero-board">&#9823;&#65039;</span>
+    <div class="badge">The Complete Chess Course</div>
+    <h1>Learn Chess<br><span>the Right Way</span></h1>
+    <p>6 structured phases that take you from absolute beginner to a confident player who thinks deeply and wins consistently.</p>
+    <div class="cta-group">
+      <a href="../en.html" class="btn-primary">&#9823; Try the Free Preview</a>
+      <a href="#pricing" class="btn-secondary">&darr; Full course for $19</a>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat"><div class="stat-v">6</div><div class="stat-l">Learning Phases</div></div>
+    <div class="stat"><div class="stat-v">30+</div><div class="stat-l">Concepts &amp; Tactics</div></div>
+    <div class="stat"><div class="stat-v">$19</div><div class="stat-l">One-time payment</div></div>
+  </div>
+
+  <!-- PHASES -->
+  <div id="phases">
+    <div class="section-title">The Complete Curriculum</div>
+    <div class="phases">
+      <div class="phase">
+        <div class="phase-num">1</div>
+        <div class="phase-body">
+          <div class="phase-name">Foundation &mdash; See the Board Like a Commander</div>
+          <div class="phase-sub">Center control, piece values, the magic question, notation, and chess history</div>
+        </div>
+        <div class="phase-tag" style="background:rgba(74,200,120,0.1);color:#4ac878;border-color:rgba(74,200,120,0.2)">Free</div>
+      </div>
+      <div class="phase">
+        <div class="phase-num">2</div>
+        <div class="phase-body">
+          <div class="phase-name">Opening Principles &mdash; Your First 10 Moves</div>
+          <div class="phase-sub">The 4 tasks, Italian Game, London System, Sicilian Defense, deadly traps</div>
+        </div>
+        <div class="phase-tag" style="background:rgba(74,200,120,0.1);color:#4ac878;border-color:rgba(74,200,120,0.2)">Free</div>
+      </div>
+      <div class="phase">
+        <div class="phase-num">3</div>
+        <div class="phase-body">
+          <div class="phase-name">Tactical Weapons &mdash; Win Material for Free</div>
+          <div class="phase-sub">Forks, pins, skewers, discovered attacks, sacrifices, back rank mate</div>
+        </div>
+        <div class="phase-tag">&#128274; Tactics</div>
+      </div>
+      <div class="phase">
+        <div class="phase-num">4</div>
+        <div class="phase-body">
+          <div class="phase-name">Strategic Thinking &mdash; Think Like a General</div>
+          <div class="phase-sub">The 4-step system, open files, weak pawns, outposts, two weaknesses</div>
+        </div>
+        <div class="phase-tag">&#128274; Strategy</div>
+      </div>
+      <div class="phase">
+        <div class="phase-num">5</div>
+        <div class="phase-body">
+          <div class="phase-name">The Endgame &mdash; Where Games Are Won</div>
+          <div class="phase-sub">King activation, passed pawns, opposition, Lucena, Philidor, rule of the square</div>
+        </div>
+        <div class="phase-tag">&#128274; Endgame</div>
+      </div>
+      <div class="phase">
+        <div class="phase-num">6</div>
+        <div class="phase-body">
+          <div class="phase-name">Your Roadmap &mdash; The Path to Real Improvement</div>
+          <div class="phase-sub">Daily routine, week-by-week plan, resources, game analysis, mental checklist</div>
+        </div>
+        <div class="phase-tag">&#128274; Roadmap</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUOTE -->
+  <div class="quote-block">
+    <div class="quote-text">&ldquo;In the opening you learn a lesson. In the middlegame you fight a battle. In the endgame you win a game.&rdquo;</div>
+    <div class="quote-author">&mdash; Chess wisdom</div>
+  </div>
+
+  <!-- FEATURES -->
+  <div class="section-title">What Makes This Course Different</div>
+  <div class="features">
+    <div class="feature-item">
+      <div class="feature-em">&#129504;</div>
+      <div class="feature-text"><strong>Think-Along Exercises</strong>Interactive exercises where you choose a move, then see the master explanation</div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-em">&#127942;</div>
+      <div class="feature-text"><strong>Quizzes After Every Phase</strong>Test your knowledge with multiple-choice questions and detailed explanations</div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-em">&#11088;</div>
+      <div class="feature-text"><strong>XP &amp; Streak System</strong>Earn XP for progress and maintain daily streaks to stay motivated</div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-em">&#128200;</div>
+      <div class="feature-text"><strong>Progress Tracking</strong>Your progress saves automatically and picks up where you left off</div>
+    </div>
+  </div>
+
+  <!-- FOR WHO -->
+  <div class="section-title">Who Is This For?</div>
+  <div class="for-who">
+    <div class="for-item">
+      <div class="for-item-em">&#127793;</div>
+      <div class="for-item-text"><strong>Complete Beginners</strong>Never played chess or only tried it casually</div>
+    </div>
+    <div class="for-item">
+      <div class="for-item-em">&#128200;</div>
+      <div class="for-item-text"><strong>Players Who Want to Improve</strong>You play but don't understand why you keep losing</div>
+    </div>
+    <div class="for-item">
+      <div class="for-item-em">&#9200;</div>
+      <div class="for-item-text"><strong>Busy People</strong>A focused guide with no filler or complex theory</div>
+    </div>
+    <div class="for-item">
+      <div class="for-item-em">&#129504;</div>
+      <div class="for-item-text"><strong>Structured Thinkers</strong>Chess builds planning and analytical skills</div>
+    </div>
+  </div>
+
+  <!-- PRICING -->
+  <div id="pricing" class="final-cta">
+    <div class="free-tag">&#10003; Free preview &mdash; 2 full phases</div>
+    <h2>Get the Full Course</h2>
+    <p>Two free phases give you the foundation. Four additional phases unlock tactics, strategy, endgames, and a complete improvement roadmap.</p>
+    <div style="font-family:'Playfair Display',serif;font-size:2.8em;color:var(--gold);margin:16px 0 4px">$19</div>
+    <div style="font-size:.82em;color:var(--text-dim);margin-bottom:24px">One-time payment &mdash; Lifetime access &mdash; No subscription</div>
+    <div class="cta-group">
+      <a href="https://gumroad.com/l/chess-academy-en" target="_blank" class="btn-primary">Buy the Full Course &rarr;</a>
+      <a href="../en.html" class="btn-secondary">&#9823; Try the Free Preview First</a>
+    </div>
+  </div>
+
+  <footer>
+    Built with &#10084; &middot; <a href="https://github.com/aneerabee/chess-academy" target="_blank">GitHub</a>
+  </footer>
+
+</div>
+</body>
+</html>
