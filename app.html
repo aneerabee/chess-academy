@@ -32,7 +32,6 @@ body {
   overflow-x: hidden;
 }
 
-/* Subtle grain overlay */
 body::before {
   content: '';
   position: fixed;
@@ -82,6 +81,22 @@ body::before {
   margin-top: 6px;
   font-weight: 300;
 }
+
+/* XP & STREAK BAR */
+.xp-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  background: var(--bg-card);
+  border: 1px solid rgba(212,168,67,0.1);
+  border-radius: 30px;
+  padding: 10px 20px;
+  margin-bottom: 12px;
+  font-size: 0.85em;
+}
+.xp-item { display: flex; align-items: center; gap: 6px; color: var(--silver); }
+.xp-item .val { color: var(--gold); font-weight: 700; }
 
 /* PROGRESS BAR */
 .progress-container {
@@ -157,9 +172,7 @@ body::before {
   to { opacity: 1; transform: translateY(0); }
 }
 
-.lesson-header {
-  margin-bottom: 24px;
-}
+.lesson-header { margin-bottom: 24px; }
 
 .lesson-phase {
   display: inline-block;
@@ -242,14 +255,9 @@ body::before {
 .concept-num.green { background: rgba(68,170,136,0.15); color: var(--accent-green); }
 .concept-num.red { background: rgba(204,68,68,0.15); color: var(--accent-red); }
 
-.concept-title-row {
-  flex: 1;
-}
+.concept-title-row { flex: 1; }
 
-.concept-name {
-  font-size: 1em;
-  font-weight: 600;
-}
+.concept-name { font-size: 1em; font-weight: 600; }
 
 .concept-hint {
   font-size: 0.78em;
@@ -272,7 +280,7 @@ body::before {
 }
 
 .concept.expanded .concept-body {
-  max-height: 2000px;
+  max-height: 4000px;
   padding-top: 16px;
 }
 
@@ -303,6 +311,93 @@ body::before {
   color: var(--gold);
   margin-bottom: 6px;
 }
+
+/* PATTERN BOX */
+.pattern-box {
+  background: rgba(85,136,204,0.06);
+  border-right: 3px solid var(--accent-blue);
+  padding: 14px 18px;
+  border-radius: 0 12px 12px 0;
+  margin: 14px 0;
+  font-size: 0.88em;
+  line-height: 1.8;
+  color: var(--text);
+}
+.pattern-label {
+  font-size: 0.72em;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--accent-blue);
+  margin-bottom: 6px;
+}
+
+/* HISTORY BOX */
+.history-box {
+  background: rgba(160,125,46,0.06);
+  border-right: 3px solid var(--gold-dim);
+  padding: 14px 18px;
+  border-radius: 0 12px 12px 0;
+  margin: 14px 0;
+  font-size: 0.88em;
+  line-height: 1.8;
+  color: var(--silver);
+  font-style: italic;
+}
+.history-label {
+  font-size: 0.72em;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--gold-dim);
+  margin-bottom: 6px;
+  font-style: normal;
+}
+
+/* THINK-ALONG BOX */
+.think-along {
+  background: rgba(130,90,200,0.06);
+  border: 1px solid rgba(130,90,200,0.15);
+  border-radius: 12px;
+  padding: 18px;
+  margin: 14px 0;
+}
+.think-along-label {
+  font-size: 0.72em;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #9b7fd4;
+  margin-bottom: 8px;
+}
+.think-along-q {
+  font-size: 0.92em;
+  color: var(--text);
+  margin-bottom: 12px;
+  line-height: 1.7;
+}
+.think-along-opts { display: flex; flex-direction: column; gap: 8px; }
+.think-along-opt {
+  background: var(--bg-hover);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px;
+  padding: 10px 14px;
+  cursor: pointer;
+  font-size: 0.88em;
+  color: var(--silver);
+  transition: all 0.3s;
+}
+.think-along-opt:hover { border-color: rgba(155,127,212,0.3); color: var(--text); }
+.think-along-opt.correct { background: rgba(68,170,136,0.12); border-color: var(--accent-green); color: var(--accent-green); }
+.think-along-opt.wrong { background: rgba(204,68,68,0.08); border-color: rgba(204,68,68,0.2); color: var(--accent-red); opacity: 0.7; }
+.think-along-reveal {
+  margin-top: 12px;
+  padding: 14px;
+  background: rgba(68,170,136,0.06);
+  border-radius: 10px;
+  font-size: 0.88em;
+  line-height: 1.8;
+  color: var(--silver);
+  display: none;
+}
+.think-along-reveal.show { display: block; }
 
 /* CHESS BOARD MINI */
 .board-mini {
@@ -380,7 +475,6 @@ body::before {
   padding: 14px;
   font-family: monospace;
   font-size: 0.9em;
-  direction: ltr;
   text-align: left;
   color: var(--silver);
   margin: 10px 0;
@@ -428,6 +522,67 @@ body::before {
   color: var(--accent-red);
   margin-bottom: 8px;
 }
+
+/* QUIZ SECTION */
+.quiz-section {
+  background: var(--bg-card);
+  border: 1px solid rgba(212,168,67,0.12);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-top: 24px;
+  margin-bottom: 14px;
+}
+.quiz-title {
+  font-size: 0.72em;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--gold);
+  margin-bottom: 16px;
+  text-align: center;
+}
+.quiz-q {
+  font-size: 0.95em;
+  color: var(--text);
+  margin-bottom: 12px;
+  line-height: 1.6;
+  font-weight: 500;
+}
+.quiz-opts { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+.quiz-opt {
+  background: var(--bg-hover);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px;
+  padding: 11px 16px;
+  cursor: pointer;
+  font-size: 0.88em;
+  color: var(--silver);
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.quiz-opt:hover { border-color: rgba(212,168,67,0.2); color: var(--text); }
+.quiz-opt.correct { background: rgba(68,170,136,0.12); border-color: var(--accent-green); color: var(--accent-green); }
+.quiz-opt.wrong { background: rgba(204,68,68,0.08); border-color: rgba(204,68,68,0.2); color: var(--accent-red); opacity: 0.7; }
+.quiz-opt.disabled { pointer-events: none; }
+.quiz-opt-letter {
+  width: 24px; height: 24px; border-radius: 6px;
+  background: rgba(255,255,255,0.04); display: flex;
+  align-items: center; justify-content: center;
+  font-size: 0.78em; font-weight: 600; flex-shrink: 0;
+}
+.quiz-explanation {
+  background: rgba(68,170,136,0.06);
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 0.85em;
+  line-height: 1.7;
+  color: var(--silver);
+  margin-top: 8px;
+  display: none;
+}
+.quiz-explanation.show { display: block; }
+.quiz-divider { height: 1px; background: rgba(255,255,255,0.04); margin: 20px 0; }
 
 /* NAV BUTTONS */
 .nav-buttons {
@@ -477,7 +632,7 @@ body::before {
   margin-top: 4px;
 }
 
-/* ── COMPLETION SCREEN ── */
+/* COMPLETION SCREEN */
 .completion-screen {
   text-align: center;
   padding: 60px 0 40px;
@@ -532,7 +687,7 @@ body::before {
   border-radius: var(--radius);
   padding: 24px;
   margin-bottom: 28px;
-  text-align: right;
+  text-align: left;
 }
 
 .cs-row {
@@ -583,12 +738,32 @@ body::before {
 }
 .home-link:hover { color: var(--gold); border-color: rgba(212,168,67,0.2); }
 
+/* XP TOAST */
+.xp-toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: var(--bg-card);
+  border: 1px solid rgba(212,168,67,0.3);
+  color: var(--gold);
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-size: 0.9em;
+  font-weight: 600;
+  z-index: 1000;
+  animation: toastIn 0.3s ease, toastOut 0.3s ease 1.5s forwards;
+  pointer-events: none;
+}
+@keyframes toastIn { from { opacity:0; transform:translateY(-10px); } to { opacity:1; transform:translateY(0); } }
+@keyframes toastOut { from { opacity:1; } to { opacity:0; transform:translateY(-10px); } }
+
 @media (max-width: 400px) {
   .header h1 { font-size: 1.8em; }
   .lesson-title { font-size: 1.4em; }
   .board-mini { grid-template-columns: repeat(8, 24px); grid-template-rows: repeat(8, 24px); }
   .board-cell { font-size: 15px; }
   .completion-grid { grid-template-columns: repeat(3, 1fr); }
+  .xp-bar { flex-wrap: wrap; gap: 12px; }
 }
 </style>
 </head>
@@ -597,6 +772,7 @@ body::before {
 <div class="app" id="app"></div>
 
 <script>
+// ── Course Content ──
 const lessons = [
   {
     phase: "الأساس",
@@ -678,7 +854,13 @@ const lessons = [
         </div>`
       }
     ],
-    quote: { text: "الشطرنج هو فن التحليل", author: "ميخائيل بوتفينيك — بطل العالم" }
+    quote: { text: "الشطرنج هو فن التحليل", author: "ميخائيل بوتفينيك — بطل العالم" },
+    quiz: [
+      { q: "حصان في المركز (e4) يتحكم بكم مربع؟", opts: ["4 مربعات", "8 مربعات", "6 مربعات"], correct: 1, explanation: "الحصان في المركز يتحكم بأقصى عدد: 8 مربعات. في الزاوية يتحكم بمربعين فقط." },
+      { q: "تبادلت قلعتك (5 نقاط) بحصان الخصم (3 نقاط). ماذا حصل؟", opts: ["ربحت مادة", "خسرت نقطتين", "تبادل متساوٍ"], correct: 1, explanation: "5 ناقص 3 = خسرت نقطتين من المادة. تبادل خاسر بدون سبب تكتيكي." },
+      { q: "ما السؤال الذي يجب أن تسأله قبل كل نقلة؟", opts: ["أي افتتاحية ألعب؟", "ماذا يريد خصمي من نقلته الأخيرة؟", "كم بقي من الوقت؟"], correct: 1, explanation: "هذا السؤال وحده يمنعك من 70% من الأخطاء." }
+    ]
+  
   },
   {
     phase: "الافتتاح",
@@ -763,7 +945,13 @@ const lessons = [
         </div>`
       }
     ],
-    quote: { text: "الافتتاح يشبه المقدمة في رواية — يحدد نغمة كل ما سيأتي", author: "أناتولي كاربوف" }
+    quote: { text: "الافتتاح يشبه المقدمة في رواية — يحدد نغمة كل ما سيأتي", author: "أناتولي كاربوف" },
+    quiz: [
+      { q: "ما الترتيب الصحيح لمهام الافتتاح؟", opts: ["إخراج الوزير ثم التبييت", "بيدق المركز ثم تطوير القطع ثم التبييت ثم ربط القلاع", "التبييت فوراً ثم التطوير"], correct: 1, explanation: "الترتيب: بيدق مركز → أحصنة وفيلة → تبييت → ربط القلعتين." },
+      { q: "لماذا Bc4 نقلة قوية في الإيطالية؟", opts: ["تهاجم المركز مباشرة", "تستهدف f7 أضعف نقطة عند الأسود", "تحمي الملك"], correct: 1, explanation: "الفيل على c4 يضغط على f7 التي يحميها الملك وحده." },
+      { q: "لماذا لا تخرج الوزير مبكراً؟", opts: ["الوزير ضعيف في الافتتاح", "الخصم سيطارده ويطور قطعه مجاناً", "الوزير يتحرك فقط في النهاية"], correct: 1, explanation: "كل مرة يهرب وزيرك = الخصم يطور قطعة جديدة مجاناً." }
+    ]
+  
   },
   {
     phase: "الأسلحة",
@@ -863,7 +1051,13 @@ const lessons = [
         </div>`
       }
     ],
-    quote: { text: "التكتيكات هي ما تفعله عندما يكون هناك ما يمكن فعله. الاستراتيجية هي ما تفعله عندما لا يوجد شيء", author: "سافيلي تارتاكوفر" }
+    quote: { text: "التكتيكات هي ما تفعله عندما يكون هناك ما يمكن فعله. الاستراتيجية هي ما تفعله عندما لا يوجد شيء", author: "سافيلي تارتاكوفر" },
+    quiz: [
+      { q: "ما الذي يجعل شوكة الحصان خطيرة جداً؟", opts: ["الحصان يقفز فوق القطع ولا يمكن سدّه", "الحصان بطيء", "الحصان أرخص قطعة"], correct: 0, explanation: "الحصان يقفز — لا يمكن وضع قطعة في طريقه لمنع الشوكة." },
+      { q: "في الدبوس، ماذا يحصل للقطعة المدبوسة؟", opts: ["تأخذ المهاجم", "لا تتحرك أو لا يجب أن تتحرك لأن خلفها قطعة أهم", "تهرب بسرعة"], correct: 1, explanation: "في الدبوس المطلق (الملك خلفها) لا تتحرك قانونياً. في النسبي، التحريك خاسر." },
+      { q: "ما هو الكش المزدوج؟", opts: ["كش مرتين متتاليتين", "قطعتان تعطيان كش في نفس الوقت", "كش على الملك والوزير"], correct: 1, explanation: "في الكش المزدوج، القطعة المتحركة + المكشوفة كلاهما يكشّان. الملك مجبر يتحرك." }
+    ]
+  
   },
   {
     phase: "العقل",
@@ -943,7 +1137,13 @@ const lessons = [
         </div>`
       }
     ],
-    quote: { text: "حتى الخطة السيئة أفضل من عدم وجود خطة", author: "فرانك مارشال" }
+    quote: { text: "حتى الخطة السيئة أفضل من عدم وجود خطة", author: "فرانك مارشال" },
+    quiz: [
+      { q: "ما أول شيء تفحصه قبل أي نقلة؟", opts: ["أي تكتيك عندي؟", "ما تهديد خصمي؟", "ما خطتي طويلة المدى؟"], correct: 1, explanation: "الأمان أولاً! افحص تهديد الخصم قبل أي شيء." },
+      { q: "لماذا البيادق المعزولة ضعيفة؟", opts: ["لا تستطيع أخذ قطع العدو", "تُحمى بالقطع فقط مما يشغلها عن الهجوم", "تسد طريق قطعك"], correct: 1, explanation: "البيدق المعزول يحتاج حماية من قطع — مما يشغلها عن المهام الهجومية." },
+      { q: "ما الذي يجعل المربع القوي مميزاً؟", opts: ["مربع في نصفك من الرقعة", "مربع لا يستطيع بيدق خصم طرد قطعتك منه", "أي مربع فيه حصانك"], correct: 1, explanation: "المربع القوي في نصف الخصم لا يُهاجم ببيدق. حصان هناك = كابوس." }
+    ]
+  
   },
   {
     phase: "الختام",
@@ -1001,7 +1201,13 @@ const lessons = [
         </div>`
       }
     ],
-    quote: { text: "في الافتتاح تتعلم درساً، في وسط اللعب تخوض معركة، في النهاية تكسب لعبة", author: "حكمة شطرنجية" }
+    quote: { text: "في الافتتاح تتعلم درساً، في وسط اللعب تخوض معركة، في النهاية تكسب لعبة", author: "حكمة شطرنجية" },
+    quiz: [
+      { q: "متى تُفعّل ملكك في نهاية اللعب؟", opts: ["بعد مبادلة كل البيادق", "فوراً بعد مبادلة الوزيرين", "فقط عند الكش"], correct: 1, explanation: "بمجرد خروج الوزيرين، أخرج ملكك للمركز. كل تأخير = فرصة ضائعة." },
+      { q: "ما هو البيدق المار؟", opts: ["أي بيدق في الصف السابع", "بيدق لا يقف أمامه أو بجانبه بيدق خصم", "بيدق أخذ قطعة خصم"], correct: 1, explanation: "البيدق المار لا يوجد ما يمنعه من الترقية — كنز يجب دعمه." },
+      { q: "ما التقنية المستخدمة في وضعية لوسينا للفوز؟", opts: ["القلعة", "الجسر", "السيخ"], correct: 1, explanation: "تقنية الجسر: ترفع قلعتك للصف الرابع لتسد الكشات، فيترقى بيدقك بأمان." }
+    ]
+  
   },
   {
     phase: "المسار",
@@ -1076,30 +1282,35 @@ const lessons = [
         </div>`
       }
     ],
-    quote: { text: "لا أؤمن بعلم النفس، أؤمن بالنقلات الجيدة", author: "بوبي فيشر" }
+    quote: { text: "لا أؤمن بعلم النفس، أؤمن بالنقلات الجيدة", author: "بوبي فيشر" },
+    quiz: [
+      { q: "ما الأفضل للتحسن: 10 مباريات سريعة أم مباراة واحدة مع تحليل؟", opts: ["10 مباريات سريعة", "مباراة واحدة مع تحليل", "متساويان"], correct: 1, explanation: "مباراة واحدة + تحليل أفضل من 10 بدون تحليل. التحليل يكشف أنماط أخطائك." },
+      { q: "كيف تبدأ تحليل مباراتك؟", opts: ["شغّل المحرك فوراً", "العب بدون محرك وابحث عن أخطائك أولاً", "اقفز للنهاية لترى من فاز"], correct: 1, explanation: "فكّر أولاً ثم تحقق بالمحرك. استخدام المحرك فوراً يجعل عقلك كسولاً." }
+    ]
+  
   }
-];
+]
 
 // ── Access Control ──
 const FREE_LESSONS = 2;
-const CODE_HASH = '3eabe4f63beddd23a720da021f2084f8b6c0255f9a4385231f491c8c32545a9c';
+const CODE_HASH = '25233f75855c29b33f4d824e949fa85e690aa644951a461a80d9ac1a65832390';
 const GUMROAD_URL = 'https://gumroad.com/l/chess-academy-ar';
 
-function hasFullAccess() { return localStorage.getItem('ca_access') === 'granted'; }
+function hasFullAccess() { return localStorage.getItem('ca_ar_access') === 'granted'; }
 
 async function sha256(str) {
   const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
-  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+  return Array.from(new Uint8Array(buf)).map(function(b) { return b.toString(16).padStart(2,'0'); }).join('');
 }
 
 async function verifyCode() {
-  const input = document.getElementById('gate-code');
-  const msg = document.getElementById('gate-msg');
-  const code = input.value.trim().toUpperCase();
+  var input = document.getElementById('gate-code');
+  var msg = document.getElementById('gate-msg');
+  var code = input.value.trim().toUpperCase();
   if (!code) { msg.textContent = 'أدخل رمز الوصول'; msg.style.color = 'var(--accent-red)'; return; }
-  const hash = await sha256(code);
+  var hash = await sha256(code);
   if (hash === CODE_HASH) {
-    localStorage.setItem('ca_access', 'granted');
+    localStorage.setItem('ca_ar_access', 'granted');
     goToLesson(currentLesson);
   } else {
     msg.textContent = 'رمز غير صحيح — تأكد من الرمز الذي حصلت عليه بعد الشراء';
@@ -1109,66 +1320,114 @@ async function verifyCode() {
 }
 
 function renderGate() {
-  const app = document.getElementById('app');
-  app.innerHTML = `
-    <div class="completion-screen">
-      <a href="index.html" class="home-link">← الرئيسية</a>
-      <span class="completion-badge">♟️</span>
-      <div class="completion-title">أكمل مسيرتك الشطرنجية</div>
-      <div class="completion-sub">استمتعت بالمعاينة؟ احصل على الدليل كاملاً — ٦ مراحل + ٣٠ مفهوم + تتبع تقدمك — بسعر قهوة واحدة.</div>
-
-      <div class="completion-next" style="margin-top:12px">
-        <div class="cn-title">الدليل الكامل</div>
-        <div style="font-family:'Amiri',serif;font-size:2.2em;color:var(--gold);margin:12px 0">$5</div>
-        <div class="cn-text" style="font-size:0.82em;color:var(--text-dim)">دفعة واحدة — وصول دائم — بدون اشتراك</div>
-        <a href="${GUMROAD_URL}" target="_blank" class="completion-cta" style="margin-top:16px">اشترِ الآن عبر Gumroad ←</a>
-      </div>
-
-      <div style="background:var(--bg-card);border-radius:var(--radius);padding:24px;margin-top:20px;border:1px solid rgba(255,255,255,0.06)">
-        <div style="font-size:0.78em;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:14px">لديك رمز وصول؟</div>
-        <div style="display:flex;gap:10px;direction:ltr">
-          <input id="gate-code" type="text" placeholder="XXXX" style="flex:1;padding:12px 16px;border-radius:10px;border:1px solid rgba(255,255,255,0.1);background:var(--bg-hover);color:var(--text);font-family:'Tajawal',sans-serif;font-size:1em;text-align:center;letter-spacing:3px;text-transform:uppercase" onkeydown="if(event.key==='Enter')verifyCode()">
-          <button onclick="verifyCode()" style="padding:12px 24px;border-radius:10px;border:none;background:var(--gold);color:var(--bg-deep);font-family:'Tajawal',sans-serif;font-weight:700;cursor:pointer;transition:all 0.3s;font-size:0.9em">تفعيل</button>
-        </div>
-        <div id="gate-msg" style="font-size:0.82em;margin-top:10px;min-height:20px"></div>
-      </div>
-
-      <div style="margin-top:28px">
-        <button class="nav-btn secondary" onclick="goToLesson(0)" style="width:100%">↩ العودة للمعاينة المجانية</button>
-      </div>
-    </div>
-  `;
+  var app = document.getElementById('app');
+  app.innerHTML = '<div class="completion-screen">' +
+    '<a href="index.html" class="home-link">← الرئيسية</a>' +
+    '<span class="completion-badge">' + String.fromCodePoint(0x265F) + String.fromCodePoint(0xFE0F) + '</span>' +
+    '<div class="completion-title">أكمل مسيرتك الشطرنجية</div>' +
+    '<div class="completion-sub">Enjoyed the preview? Get the full course &mdash; 6 phases, 30+ concepts, quizzes, progress tracking &mdash; for the price من a lunch.</div>' +
+    '<div class="completion-next" style="margin-top:12px">' +
+      '<div class="cn-title">الدليل الكامل</div>' +
+      '<div style="font-family:Amiri,serif;font-size:2.2em;color:var(--gold);margin:12px 0">$19</div>' +
+      '<div class="cn-text" style="font-size:0.82em;color:var(--text-dim)">دفعة واحدة — وصول دائم — بدون اشتراك</div>' +
+      '<a href="' + GUMROAD_URL + '" target="_blank" class="completion-cta" style="margin-top:16px">← اشترِ الآن عبر Gumroad</a>' +
+    '</div>' +
+    '<div style="background:var(--bg-card);border-radius:var(--radius);padding:24px;margin-top:20px;border:1px solid rgba(255,255,255,0.06)">' +
+      '<div style="font-size:0.78em;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:14px">لديك رمز وصول؟</div>' +
+      '<div style="display:flex;gap:10px">' +
+        '<input id="gate-code" type="text" placeholder="الرمز" style="flex:1;padding:12px 16px;border-radius:10px;border:1px solid rgba(255,255,255,0.1);background:var(--bg-hover);color:var(--text);font-family:Tajawal,sans-serif;font-size:1em;text-align:center;letter-spacing:3px;text-transform:uppercase" onkeydown="if(event.key===\'Enter\')verifyCode()">' +
+        '<button onclick="verifyCode()" style="padding:12px 24px;border-radius:10px;border:none;background:var(--gold);color:var(--bg-deep);font-family:Tajawal,sans-serif;font-weight:700;cursor:pointer;transition:all 0.3s;font-size:0.9em">تفعيل</button>' +
+      '</div>' +
+      '<div id="gate-msg" style="font-size:0.82em;margin-top:10px;min-height:20px"></div>' +
+    '</div>' +
+    '<div style="margin-top:28px">' +
+      '<button class="nav-btn secondary" onclick="goToLesson(0)" style="width:100%">↩ العودة للمعاينة المجانية</button>' +
+    '</div>' +
+  '</div>';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// ── State (persisted to localStorage) ──
-let currentLesson = parseInt(localStorage.getItem('ca_lesson') || '0');
-let expandedConcepts = new Set();
-let completedLessons = new Set(JSON.parse(localStorage.getItem('ca_completed') || '[]'));
+// ── XP System ──
+var xpState = JSON.parse(localStorage.getItem('ca_ar_xp') || '{"total":0,"conceptsExpanded":[],"quizzesCorrect":[],"phasesCompleted":[]}');
+function saveXP() { localStorage.setItem('ca_ar_xp', JSON.stringify(xpState)); }
+function addXP(amount, type, id) {
+  var list;
+  if (type === 'concept') list = xpState.conceptsExpanded;
+  else if (type === 'quiz') list = xpState.quizzesCorrect;
+  else if (type === 'phase') list = xpState.phasesCompleted;
+  else return;
+  if (list.indexOf(id) !== -1) return;
+  list.push(id);
+  xpState.total += amount;
+  saveXP();
+  showXPToast('+' + amount + ' XP');
+  updateXPDisplay();
+}
+function showXPToast(msg) {
+  var t = document.createElement('div');
+  t.className = 'xp-toast';
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(function() { if (t.parentNode) t.parentNode.removeChild(t); }, 2000);
+}
+function updateXPDisplay() {
+  var el = document.getElementById('xp-display');
+  if (el) el.textContent = xpState.total;
+}
+
+// ── Daily Streak ──
+var streakData = JSON.parse(localStorage.getItem('ca_ar_streak') || '{"count":0,"lastDate":""}');
+function checkStreak() {
+  var today = new Date().toISOString().slice(0, 10);
+  if (streakData.lastDate === today) return;
+  var yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+  if (streakData.lastDate === yesterday) {
+    streakData.count += 1;
+  } else if (streakData.lastDate !== today) {
+    streakData.count = 1;
+  }
+  streakData.lastDate = today;
+  localStorage.setItem('ca_ar_streak', JSON.stringify(streakData));
+}
+checkStreak();
+
+// ── State ──
+var currentLesson = parseInt(localStorage.getItem('ca_ar_lesson') || '0');
+var expandedConcepts = {};
+var completedLessons = JSON.parse(localStorage.getItem('ca_ar_completed') || '[]');
+var answeredQuizzes = JSON.parse(localStorage.getItem('ca_ar_quizzes') || '{}');
 
 function saveState() {
-  localStorage.setItem('ca_lesson', currentLesson);
-  localStorage.setItem('ca_completed', JSON.stringify([...completedLessons]));
+  localStorage.setItem('ca_ar_lesson', currentLesson);
+  localStorage.setItem('ca_ar_completed', JSON.stringify(completedLessons));
+  localStorage.setItem('ca_ar_quizzes', JSON.stringify(answeredQuizzes));
 }
 
 function toggleConcept(lessonIdx, conceptIdx) {
-  const key = `${lessonIdx}-${conceptIdx}`;
-  if (expandedConcepts.has(key)) expandedConcepts.delete(key);
-  else expandedConcepts.add(key);
+  var key = lessonIdx + '-' + conceptIdx;
+  if (expandedConcepts[key]) {
+    delete expandedConcepts[key];
+  } else {
+    expandedConcepts[key] = true;
+    addXP(10, 'concept', key);
+  }
   render();
 }
 
 function goToLesson(idx) {
   if (idx >= FREE_LESSONS && !hasFullAccess()) { renderGate(); return; }
   currentLesson = idx;
-  expandedConcepts.clear();
+  expandedConcepts = {};
   saveState();
   render();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function nextLesson() {
-  completedLessons.add(currentLesson);
+  if (completedLessons.indexOf(currentLesson) === -1) {
+    completedLessons.push(currentLesson);
+    addXP(100, 'phase', 'phase-' + currentLesson);
+  }
   saveState();
   if (currentLesson < lessons.length - 1) {
     goToLesson(currentLesson + 1);
@@ -1183,123 +1442,205 @@ function prevLesson() {
 
 function resetProgress() {
   if (!confirm('هل تريد حقاً إعادة الدليل من البداية؟')) return;
-  completedLessons.clear();
+  completedLessons = [];
   currentLesson = 0;
+  xpState = {total:0,conceptsExpanded:[],quizzesCorrect:[],phasesCompleted:[]};
+  answeredQuizzes = {};
+  saveXP();
   saveState();
   goToLesson(0);
 }
 
+// ── Quiz Handler ──
+function answerQuiz(lessonIdx, quizIdx, chosenIdx) {
+  var qKey = lessonIdx + '-' + quizIdx;
+  if (answeredQuizzes[qKey] !== undefined) return;
+  var quiz = lessons[lessonIdx].quiz[quizIdx];
+  var isCorrect = chosenIdx === quiz.correct;
+  answeredQuizzes[qKey] = chosenIdx;
+  saveState();
+  if (isCorrect) {
+    addXP(25, 'quiz', qKey);
+  }
+  // Update DOM directly for speed
+  var opts = document.querySelectorAll('#quiz-' + lessonIdx + '-' + quizIdx + ' .quiz-opt');
+  for (var i = 0; i < opts.length; i++) {
+    opts[i].classList.add('disabled');
+    if (i === quiz.correct) opts[i].classList.add('correct');
+    else if (i === chosenIdx && !isCorrect) opts[i].classList.add('wrong');
+  }
+  var expl = document.getElementById('quiz-expl-' + lessonIdx + '-' + quizIdx);
+  if (expl) expl.classList.add('show');
+}
+
+// ── Think-Along Handler ──
+function revealThinkAlong(el, isCorrect) {
+  var parent = el.closest('.think-along');
+  if (!parent) return;
+  var opts = parent.querySelectorAll('.think-along-opt');
+  var alreadyAnswered = false;
+  for (var i = 0; i < opts.length; i++) {
+    if (opts[i].classList.contains('correct') || opts[i].classList.contains('wrong')) { alreadyAnswered = true; break; }
+  }
+  if (alreadyAnswered) return;
+  for (var j = 0; j < opts.length; j++) {
+    opts[j].style.pointerEvents = 'none';
+  }
+  if (isCorrect) {
+    el.classList.add('correct');
+  } else {
+    el.classList.add('wrong');
+    for (var k = 0; k < opts.length; k++) {
+      if (opts[k].getAttribute('onclick') && opts[k].getAttribute('onclick').indexOf('true') !== -1) {
+        opts[k].classList.add('correct');
+      }
+    }
+  }
+  var reveal = parent.querySelector('.think-along-reveal');
+  if (reveal) reveal.classList.add('show');
+}
+
 function renderCompletion() {
-  const app = document.getElementById('app');
-  app.innerHTML = `
-    <div class="completion-screen">
-      <a href="index.html" class="home-link">← الصفحة الرئيسية</a>
-      <span class="completion-badge">♚</span>
-      <div class="completion-title">أحسنت — أكملت الدليل كاملاً</div>
-      <div class="completion-sub">قطعت المسافة التي يخشى معظم اللاعبين البدء بها. أنت الآن تمتلك الأساس الذي يفتقده 90% من اللاعبين حول العالم.</div>
-
-      <div class="completion-grid">
-        <div class="completion-stat"><div class="cs-v">٦</div><div class="cs-l">مراحل مكتملة</div></div>
-        <div class="completion-stat"><div class="cs-v">٣٠+</div><div class="cs-l">مفهوم تعلمته</div></div>
-        <div class="completion-stat"><div class="cs-v">١٠٠٪</div><div class="cs-l">تقدم</div></div>
-      </div>
-
-      <div class="completion-summary">
-        <div class="cs-row">✓ الأساس — السيطرة على المركز وقيمة القطع</div>
-        <div class="cs-row">✓ الافتتاح — المهام الأربع وافتتاحيتك الأولى</div>
-        <div class="cs-row">✓ الأسلحة — الشوكة، الدبوس، السيخ، والكشف</div>
-        <div class="cs-row">✓ العقل — نظام التفكير والاستراتيجية</div>
-        <div class="cs-row">✓ الختام — نهايات اللعب وإدارة البيادق</div>
-        <div class="cs-row">✓ المسار — روتين التطوير اليومي</div>
-      </div>
-
-      <div class="completion-next">
-        <div class="cn-title">خطوتك التالية</div>
-        <div class="cn-text">افتح Lichess الآن وطبّق ما تعلمته. ثلاثون دقيقة يومياً — ألغاز تكتيكية + مباراة واحدة + تحليل — تكفي لتتقدم بشكل ملموس خلال شهر واحد.</div>
-        <a href="https://lichess.org" target="_blank" class="completion-cta">افتح Lichess ابدأ التطبيق ←</a>
-      </div>
-
-      <div class="completion-actions">
-        <button class="nav-btn secondary" onclick="goToLesson(0)" style="flex:1">مراجعة من البداية ↩</button>
-        <button class="nav-btn secondary" onclick="resetProgress()" style="flex:1;color:var(--accent-red)">إعادة ضبط التقدم</button>
-      </div>
-    </div>
-  `;
+  var app = document.getElementById('app');
+  app.innerHTML = '<div class="completion-screen">' +
+    '<a href="index.html" class="home-link">← الرئيسية</a>' +
+    '<span class="completion-badge">' + String.fromCodePoint(0x265A) + '</span>' +
+    '<div class="completion-title">أحسنت — أكملت الدليل كاملاً</div>' +
+    '<div class="completion-sub">You have covered the ground that most players never bother to learn. You now have the foundation that 90% من players worldwide are missing.</div>' +
+    '<div class="completion-grid">' +
+      '<div class="completion-stat"><div class="cs-v">6</div><div class="cs-l">مراحل مكتملة</div></div>' +
+      '<div class="completion-stat"><div class="cs-v">30+</div><div class="cs-l">مفهوم تعلمته</div></div>' +
+      '<div class="completion-stat"><div class="cs-v">' + xpState.total + '</div><div class="cs-l">نقطة مكتسبة</div></div>' +
+    '</div>' +
+    '<div class="completion-summary">' +
+      '<div class="cs-row">' + String.fromCodePoint(0x2713) + ' الأساس — السيطرة على المركز وقيمة القطع</div>' +
+      '<div class="cs-row">' + String.fromCodePoint(0x2713) + ' الافتتاح — المهام الأربع وافتتاحيتك الأولى</div>' +
+      '<div class="cs-row">' + String.fromCodePoint(0x2713) + ' الأسلحة — الشوكة والدبوس والسيخ والكشف</div>' +
+      '<div class="cs-row">' + String.fromCodePoint(0x2713) + ' العقل — نظام التفكير والاستراتيجية</div>' +
+      '<div class="cs-row">' + String.fromCodePoint(0x2713) + ' الختام — نهايات اللعب وإدارة البيادق</div>' +
+      '<div class="cs-row">' + String.fromCodePoint(0x2713) + ' المسار — روتين التطوير اليومي</div>' +
+    '</div>' +
+    '<div class="completion-next">' +
+      '<div class="cn-title">خطوتك التالية</div>' +
+      '<div class="cn-text">افتح Lichess الآن وطبّق ما تعلمته. ثلاثون دقيقة يومياً — ألغاز تكتيكية + مباراة واحدة + تحليل — تكفي لتتقدم خلال شهر.</div>' +
+      '<a href="https://lichess.org" target="_blank" class="completion-cta">← افتح Lichess وابدأ التطبيق</a>' +
+    '</div>' +
+    '<div class="completion-actions">' +
+      '<button class="nav-btn secondary" onclick="goToLesson(0)" style="flex:1">↩ مراجعة من البداية</button>' +
+      '<button class="nav-btn secondary" onclick="resetProgress()" style="flex:1;color:var(--accent-red)">إعادة ضبط التقدم</button>' +
+    '</div>' +
+  '</div>';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function render() {
-  const app = document.getElementById('app');
-  const lesson = lessons[currentLesson];
-  const progress = ((completedLessons.size) / lessons.length) * 100;
+  var app = document.getElementById('app');
+  var lesson = lessons[currentLesson];
+  var totalComplete = completedLessons.length;
+  var progress = (totalComplete / lessons.length) * 100;
+  var letters = ['A', 'B', 'C', 'D'];
 
-  app.innerHTML = `
-    <div class="header">
-      <a href="index.html" class="home-link">← الرئيسية</a>
-      <span class="header-icon">♚</span>
-      <h1>أكاديمية الشطرنج</h1>
-      <p>من الصفر إلى التفكير كمحترف</p>
-    </div>
+  var html = '<div class="header">' +
+    '<a href="index.html" class="home-link">← الرئيسية</a>' +
+    '<span class="header-icon">' + String.fromCodePoint(0x265A) + '</span>' +
+    '<h1>أكاديمية الشطرنج</h1>' +
+    '<p>من الصفر إلى التفكير كمحترف</p>' +
+  '</div>' +
+  '<div class="xp-bar">' +
+    '<div class="xp-item"><span>' + String.fromCodePoint(0x2B50) + '</span> <span class="val" id="xp-display">' + xpState.total + '</span> نقطة</div>' +
+    '<div class="xp-item"><span>' + String.fromCodePoint(0x1F525) + '</span> <span class="val">' + streakData.count + '</span> يوم متتالي</div>' +
+  '</div>' +
+  '<div class="progress-container">' +
+    '<div class="progress-label">' +
+      '<span>المرحلة ' + (currentLesson + 1) + ' من ' + lessons.length + '</span>' +
+      '<span>' + Math.round(progress) + '% مكتمل</span>' +
+    '</div>' +
+    '<div class="progress-bar"><div class="progress-fill" style="width:' + progress + '%"></div></div>' +
+  '</div>' +
+  '<div class="nav-tabs">';
 
-    <div class="progress-container">
-      <div class="progress-label">
-        <span>المرحلة ${currentLesson + 1} من ${lessons.length}</span>
-        <span>${Math.round(progress)}% مكتمل</span>
-      </div>
-      <div class="progress-bar">
-        <div class="progress-fill" style="width: ${progress}%"></div>
-      </div>
-    </div>
+  for (var ti = 0; ti < lessons.length; ti++) {
+    var tabClass = ti === currentLesson ? 'nav-tab active' : 'nav-tab';
+    var prefix = '';
+    if (completedLessons.indexOf(ti) !== -1) prefix = String.fromCodePoint(0x2713) + ' ';
+    else if (ti >= FREE_LESSONS && !hasFullAccess()) prefix = String.fromCodePoint(0x1F512) + ' ';
+    html += '<div class="' + tabClass + '" onclick="goToLesson(' + ti + ')">' + prefix + lessons[ti].phase + '</div>';
+  }
 
-    <div class="nav-tabs">
-      ${lessons.map((l, i) => `
-        <div class="nav-tab ${i === currentLesson ? 'active' : ''}" onclick="goToLesson(${i})">
-          ${completedLessons.has(i) ? '✓ ' : (i >= FREE_LESSONS && !hasFullAccess()) ? '🔒 ' : ''}${l.phase}
-        </div>
-      `).join('')}
-    </div>
+  html += '</div>' +
+  '<div class="lesson" key="' + currentLesson + '">' +
+    '<div class="lesson-header">' +
+      '<div class="lesson-phase">المرحلة ' + (currentLesson + 1) + ' &mdash; ' + lesson.phase + '</div>' +
+      '<div class="lesson-title">' + lesson.title + '</div>' +
+      '<div class="lesson-subtitle">' + lesson.subtitle + '</div>' +
+    '</div>';
 
-    <div class="lesson" key="${currentLesson}">
-      <div class="lesson-header">
-        <div class="lesson-phase">المرحلة ${currentLesson + 1} — ${lesson.phase}</div>
-        <div class="lesson-title">${lesson.title}</div>
-        <div class="lesson-subtitle">${lesson.subtitle}</div>
-      </div>
+  for (var ci = 0; ci < lesson.concepts.length; ci++) {
+    var c = lesson.concepts[ci];
+    var isExp = expandedConcepts[currentLesson + '-' + ci];
+    html += '<div class="concept ' + (isExp ? 'expanded' : '') + '" onclick="toggleConcept(' + currentLesson + ',' + ci + ')">' +
+      '<div class="concept-header">' +
+        '<div class="concept-num ' + c.color + '">' + c.num + '</div>' +
+        '<div class="concept-title-row">' +
+          '<div class="concept-name">' + c.name + '</div>' +
+          '<div class="concept-hint">' + c.hint + '</div>' +
+        '</div>' +
+        '<div class="concept-arrow">' + String.fromCodePoint(0x25BC) + '</div>' +
+      '</div>' +
+      '<div class="concept-body">' + c.body + '</div>' +
+    '</div>';
+  }
 
-      ${lesson.concepts.map((c, ci) => {
-        const isExpanded = expandedConcepts.has(`${currentLesson}-${ci}`);
-        return `
-          <div class="concept ${isExpanded ? 'expanded' : ''}" onclick="toggleConcept(${currentLesson}, ${ci})">
-            <div class="concept-header">
-              <div class="concept-num ${c.color}">${c.num}</div>
-              <div class="concept-title-row">
-                <div class="concept-name">${c.name}</div>
-                <div class="concept-hint">${c.hint}</div>
-              </div>
-              <div class="concept-arrow">▼</div>
-            </div>
-            <div class="concept-body">
-              ${c.body}
-            </div>
-          </div>
-        `;
-      }).join('')}
+  // Quiz section
+  if (lesson.quiz && lesson.quiz.length > 0) {
+    html += '<div class="quiz-section"><div class="quiz-title">اختبر معلوماتك</div>';
+    for (var qi = 0; qi < lesson.quiz.length; qi++) {
+      var q = lesson.quiz[qi];
+      var qKey = currentLesson + '-' + qi;
+      var wasAnswered = answeredQuizzes[qKey] !== undefined;
+      if (qi > 0) html += '<div class="quiz-divider"></div>';
+      html += '<div id="quiz-' + currentLesson + '-' + qi + '">' +
+        '<div class="quiz-q">' + (qi + 1) + '. ' + q.q + '</div>' +
+        '<div class="quiz-opts">';
+      for (var oi = 0; oi < q.opts.length; oi++) {
+        var optClass = 'quiz-opt';
+        if (wasAnswered) {
+          optClass += ' disabled';
+          if (oi === q.correct) optClass += ' correct';
+          else if (oi === answeredQuizzes[qKey] && oi !== q.correct) optClass += ' wrong';
+        }
+        html += '<div class="' + optClass + '" onclick="answerQuiz(' + currentLesson + ',' + qi + ',' + oi + ')">' +
+          '<div class="quiz-opt-letter">' + letters[oi] + '</div>' + q.opts[oi] +
+        '</div>';
+      }
+      html += '</div>';
+      html += '<div class="quiz-explanation ' + (wasAnswered ? 'show' : '') + '" id="quiz-expl-' + currentLesson + '-' + qi + '">' + q.explanation + '</div>';
+      html += '</div>';
+    }
+    html += '</div>';
+  }
 
-      <div class="footer-quote">
-        «${lesson.quote.text}»
-        <div class="author">— ${lesson.quote.author}</div>
-      </div>
+  html += '<div class="footer-quote">' +
+    '&ldquo;' + lesson.quote.text + '&rdquo;' +
+    '<div class="author">&mdash; ' + lesson.quote.author + '</div>' +
+  '</div>' +
+  '<div class="nav-buttons">';
 
-      <div class="nav-buttons">
-        ${currentLesson > 0 ? `<button class="nav-btn secondary" onclick="prevLesson()">→ السابق</button>` : ''}
-        ${currentLesson < lessons.length - 1
-          ? (currentLesson === FREE_LESSONS - 1 && !hasFullAccess()
-            ? `<button class="nav-btn primary" onclick="nextLesson()">🔓 أتقنت هذه المرحلة — احصل على الباقي ←</button>`
-            : `<button class="nav-btn primary" onclick="nextLesson()">أتقنت هذه المرحلة ←</button>`)
-          : `<button class="nav-btn primary" onclick="nextLesson()">أنهيت الدليل — شاهد ملخصك ✓</button>`}
-      </div>
-    </div>
-  `;
+  if (currentLesson > 0) {
+    html += '<button class="nav-btn secondary" onclick="prevLesson()">→ السابق</button>';
+  }
+  if (currentLesson < lessons.length - 1) {
+    if (currentLesson === FREE_LESSONS - 1 && !hasFullAccess()) {
+      html += '<button class="nav-btn primary" onclick="nextLesson()">' + String.fromCodePoint(0x1F513) + ' أتقنت هذه المرحلة — احصل على الباقي ←</button>';
+    } else {
+      html += '<button class="nav-btn primary" onclick="nextLesson()">Mastered This المرحلة &rarr;</button>';
+    }
+  } else {
+    html += '<button class="nav-btn primary" onclick="nextLesson()">أنهيت الدليل — شاهد ملخصك ' + String.fromCodePoint(0x2713) + '</button>';
+  }
+
+  html += '</div></div>';
+  app.innerHTML = html;
 }
 
 render();
