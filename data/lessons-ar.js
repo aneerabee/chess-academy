@@ -829,7 +829,7 @@ const LESSONS_AR = [
 <li><strong>أغلق الخط:</strong> ضع بيدقاً يسد الخط بين المُسمِّر والمُسمَّر.</li>
 </ul>
 `,
-        fen: 'r1bqkb1r/pppppppp/2n2n2/8/3PP3/6B1/PPP2PPP/RN1QKBNR b KQkq - 0 4',
+        fen: 'r1bqkb1r/pppppppp/2n2n2/6B1/3PP3/8/PPP2PPP/RN1QKBNR b KQkq - 0 4',
         highlights: ['g5', 'f6'],
         arrows: [['g5','f6'],['f6','d8']],
         additionalPositions: [
