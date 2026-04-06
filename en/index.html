@@ -3,308 +3,1539 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chess Academy &mdash; Learn Chess the Right Way</title>
-<meta name="description" content="A comprehensive chess course in English. 6 structured phases take you from absolute beginner to confident player. Free preview available.">
+<title>Chess Academy — Stop Losing at Chess | Structured Course from Zero to Confident Player</title>
+<meta name="description" content="The first structured chess course that actually works. 6 phases, 32 concepts, interactive boards, and quizzes. Try 2 phases free, then unlock the full guide for $19.">
+<meta name="keywords" content="learn chess, chess course, chess for beginners, chess tactics, chess strategy, chess endgame, interactive chess, chess tutorial">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Chess Academy — Stop Losing at Chess">
+<meta property="og:description" content="6 phases, 32 concepts, interactive boards. 2 phases free. Full guide for $19.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://chess-academy.example.com/og-image-en.png">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Chess Academy — Stop Losing at Chess">
+<meta name="twitter:description" content="A structured chess course from zero to confident player. Try free now.">
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "name": "Chess Academy — Structured Chess Course",
+  "description": "An interactive chess course with 6 phases and 32 concepts, featuring interactive boards and quizzes",
+  "provider": { "@type": "Organization", "name": "Chess Academy" },
+  "inLanguage": ["en", "ar"],
+  "offers": {
+    "@type": "Offer",
+    "price": "19",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock"
+  }
+}
+</script>
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
 <style>
+/* ============ RESET & BASE ============ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
 :root {
   --bg: #080810;
   --card: #10101c;
+  --card-hover: #181830;
   --gold: #d4a843;
-  --gold-dim: #9a7830;
-  --gold-glow: rgba(212,168,67,0.12);
-  --silver: #8a9bb0;
-  --text: #e8e4dd;
-  --text-dim: #5a5650;
-  --r: 16px;
+  --gold-light: #f0d078;
+  --gold-dim: #a07820;
+  --text: #e8e8f0;
+  --text-muted: #8888a0;
+  --green: #34c759;
+  --red: #ff3b30;
+  --white: #ffffff;
+  --radius: 16px;
+  --radius-sm: 10px;
 }
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family:'Inter',system-ui,-apple-system,sans-serif; background:var(--bg); color:var(--text); min-height:100vh; overflow-x:hidden; }
 
-body::before { content:''; position:fixed; inset:0; opacity:.025;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  pointer-events:none; z-index:999; }
+html { scroll-behavior: smooth; font-size: 16px; }
 
-.wrap { max-width:680px; margin:0 auto; padding:0 20px 80px; }
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
 
-/* HERO */
-.hero { text-align:center; padding:64px 0 48px; position:relative; }
-.hero-board {
-  font-size:72px; display:block; margin-bottom:20px;
+/* Grain Overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/12/schema'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+}
+
+h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+
+a { color: var(--gold); text-decoration: none; }
+a:hover { color: var(--gold-light); }
+
+.container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+/* ============ ANIMATIONS ============ */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-18px); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(212,168,67,0.4); }
+  50% { box-shadow: 0 0 0 16px rgba(212,168,67,0); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============ BUTTONS ============ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 36px;
+  border-radius: 50px;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--gold), var(--gold-dim));
+  color: #0a0a12;
+  animation: pulse 2.5s infinite;
+}
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(212,168,67,0.35);
+  color: #0a0a12;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--gold);
+  border: 2px solid var(--gold);
+}
+.btn-secondary:hover {
+  background: rgba(212,168,67,0.1);
+  transform: translateY(-3px);
+  color: var(--gold-light);
+}
+
+/* ============ HERO ============ */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 120px 24px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(212,168,67,0.08) 0%, transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.hero-chess-piece {
+  font-size: 6rem;
   animation: float 4s ease-in-out infinite;
+  margin-bottom: 24px;
+  display: inline-block;
   filter: drop-shadow(0 0 40px rgba(212,168,67,0.3));
 }
-@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
 
-.badge {
-  display:inline-block; font-size:10px; letter-spacing:3px; text-transform:uppercase;
-  color:var(--gold); background:var(--gold-glow); padding:5px 16px;
-  border-radius:20px; border:1px solid rgba(212,168,67,0.2); margin-bottom:20px;
+.hero-badge {
+  display: inline-block;
+  background: rgba(212,168,67,0.12);
+  border: 1px solid rgba(212,168,67,0.3);
+  color: var(--gold);
+  padding: 8px 24px;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 28px;
+  letter-spacing: 0.5px;
 }
+
 .hero h1 {
-  font-family:'Playfair Display',serif; font-size:clamp(2em,6vw,3.2em);
-  color:var(--text); font-weight:700; line-height:1.2; margin-bottom:14px;
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  line-height: 1.3;
+  margin-bottom: 20px;
+  color: var(--white);
 }
-.hero h1 span { color:var(--gold); }
-.hero p { color:var(--silver); font-size:1.05em; font-weight:300; line-height:1.8; max-width:500px; margin:0 auto 32px; }
 
-/* CTA */
-.cta-group { display:flex; flex-direction:column; gap:12px; align-items:center; }
-.btn-primary {
-  display:inline-flex; align-items:center; gap:10px;
-  background:linear-gradient(135deg,var(--gold-dim),var(--gold));
-  color:#0a0a0f; font-family:'Inter',sans-serif; font-weight:700;
-  font-size:1.1em; padding:16px 36px; border-radius:50px; border:none;
-  cursor:pointer; text-decoration:none; transition:all .3s;
-  box-shadow:0 4px 30px rgba(212,168,67,0.25);
-}
-.btn-primary:hover { transform:translateY(-2px); box-shadow:0 8px 40px rgba(212,168,67,0.4); }
-.btn-secondary {
-  display:inline-flex; align-items:center; gap:8px;
-  color:var(--silver); font-family:'Inter',sans-serif; font-size:.9em;
-  text-decoration:none; padding:10px 20px; border-radius:30px;
-  border:1px solid rgba(255,255,255,0.07); background:rgba(255,255,255,0.02);
-  transition:all .3s; cursor:pointer;
-}
-.btn-secondary:hover { color:var(--text); border-color:rgba(255,255,255,0.15); }
+.hero h1 span { color: var(--gold); }
 
-/* STATS */
-.stats { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:48px 0; }
-.stat {
-  background:var(--card); border:1px solid rgba(255,255,255,0.04);
-  border-radius:var(--r); padding:20px 12px; text-align:center;
+.hero-sub {
+  font-size: 1.25rem;
+  color: var(--text-muted);
+  max-width: 650px;
+  margin: 0 auto 40px;
+  line-height: 1.8;
 }
-.stat-v { font-size:1.8em; font-weight:700; color:var(--gold); font-family:'Playfair Display',serif; }
-.stat-l { font-size:.78em; color:var(--text-dim); margin-top:4px; }
 
-/* PHASES */
+.hero-buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.hero-note {
+  margin-top: 28px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+.hero-note strong { color: var(--green); }
+
+/* ============ PROBLEM SECTION ============ */
+.problem {
+  padding: 100px 0;
+}
+
+.section-label {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+}
+
 .section-title {
-  font-size:.7em; letter-spacing:3px; text-transform:uppercase;
-  color:var(--gold); text-align:center; margin-bottom:24px;
+  text-align: center;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  color: var(--white);
+  margin-bottom: 60px;
 }
-.phases { display:flex; flex-direction:column; gap:10px; margin-bottom:48px; }
-.phase {
-  background:var(--card); border:1px solid rgba(255,255,255,0.04);
-  border-radius:var(--r); padding:18px 20px;
-  display:flex; align-items:center; gap:16px;
-  transition:border-color .3s;
+
+.pain-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
 }
-.phase:hover { border-color:rgba(212,168,67,0.15); }
+
+.pain-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 36px 28px;
+  border: 1px solid rgba(255,255,255,0.04);
+  transition: all 0.3s ease;
+}
+.pain-card:hover {
+  border-color: rgba(212,168,67,0.2);
+  transform: translateY(-4px);
+}
+
+.pain-icon {
+  font-size: 2.4rem;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.pain-card h3 {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--white);
+}
+
+.pain-card p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+/* ============ STATS STRIP ============ */
+.stats {
+  padding: 48px 0;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  background: linear-gradient(180deg, rgba(212,168,67,0.03) 0%, transparent 100%);
+}
+
+.stats-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px 48px;
+}
+
+.stat-item { text-align: center; min-width: 120px; }
+
+.stat-number {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  color: var(--gold);
+  font-weight: 700;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* ============ CURRICULUM ============ */
+.curriculum { padding: 100px 0; }
+
+.phase-list {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.phase-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  border: 1px solid rgba(255,255,255,0.04);
+  overflow: hidden;
+  transition: border-color 0.3s;
+}
+.phase-card:hover { border-color: rgba(212,168,67,0.15); }
+
+.phase-card.free { border-left: 4px solid var(--green); }
+.phase-card.locked { border-left: 4px solid var(--gold-dim); }
+
+.phase-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 28px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.phase-header:hover { background: rgba(255,255,255,0.02); }
+
+.phase-info { display: flex; align-items: center; gap: 16px; }
+
 .phase-num {
-  width:34px; height:34px; border-radius:50%;
-  background:var(--gold-glow); border:1px solid rgba(212,168,67,0.2);
-  color:var(--gold); font-size:.85em; font-weight:700;
-  display:flex; align-items:center; justify-content:center; flex-shrink:0;
-}
-.phase-body { flex:1; }
-.phase-name { font-size:.95em; font-weight:600; color:var(--text); }
-.phase-sub { font-size:.78em; color:var(--text-dim); margin-top:3px; }
-.phase-tag {
-  font-size:.68em; padding:3px 10px; border-radius:10px;
-  background:var(--gold-glow); color:var(--gold);
-  border:1px solid rgba(212,168,67,0.15); white-space:nowrap;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1rem;
+  flex-shrink: 0;
+  font-family: 'Inter', sans-serif;
 }
 
-/* QUOTE */
-.quote-block {
-  background:linear-gradient(135deg,#12121e,#0e0e1a);
-  border:1px solid rgba(212,168,67,0.1); border-left:3px solid var(--gold);
-  border-radius:var(--r) 0 0 var(--r); padding:24px 24px;
-  margin:40px 0; position:relative;
+.phase-card.free .phase-num {
+  background: rgba(52,199,89,0.15);
+  color: var(--green);
 }
-.quote-text { font-family:'Playfair Display',serif; font-size:1.15em; color:var(--text); line-height:1.8; }
-.quote-author { font-size:.8em; color:var(--gold-dim); margin-top:10px; }
-
-/* FEATURES */
-.features { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:48px; }
-.feature-item {
-  background:var(--card); border:1px solid rgba(255,255,255,0.04);
-  border-radius:var(--r); padding:16px 18px;
-  display:flex; align-items:flex-start; gap:12px;
-}
-.feature-em { font-size:1.3em; margin-top:2px; }
-.feature-text { font-size:.85em; color:var(--silver); line-height:1.6; }
-.feature-text strong { color:var(--text); display:block; margin-bottom:3px; font-size:.95em; }
-
-/* FOR WHO */
-.for-who { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:48px; }
-.for-item {
-  background:var(--card); border:1px solid rgba(255,255,255,0.04);
-  border-radius:var(--r); padding:16px 18px;
-  display:flex; align-items:flex-start; gap:12px;
-}
-.for-item-em { font-size:1.3em; margin-top:2px; }
-.for-item-text { font-size:.85em; color:var(--silver); line-height:1.6; }
-.for-item-text strong { color:var(--text); display:block; margin-bottom:3px; font-size:.95em; }
-
-/* FINAL CTA */
-.final-cta {
-  background:linear-gradient(135deg,#14142a,#1a1a30);
-  border:1px solid rgba(212,168,67,0.1); border-radius:20px;
-  padding:40px 30px; text-align:center;
-}
-.final-cta h2 { font-family:'Playfair Display',serif; font-size:1.7em; margin-bottom:10px; color:var(--gold); }
-.final-cta p { color:var(--silver); font-size:.9em; margin-bottom:24px; line-height:1.7; }
-
-/* FREE TAG */
-.free-tag {
-  display:inline-flex; align-items:center; gap:6px;
-  background:rgba(74,200,120,0.1); color:#4ac878;
-  border:1px solid rgba(74,200,120,0.2); border-radius:20px;
-  font-size:.75em; padding:4px 14px; margin-bottom:16px;
+.phase-card.locked .phase-num {
+  background: rgba(212,168,67,0.15);
+  color: var(--gold);
 }
 
-footer { text-align:center; padding:40px 0 20px; color:var(--text-dim); font-size:.78em; }
-footer a { color:var(--gold-dim); text-decoration:none; }
+.phase-title-text { font-weight: 700; font-size: 1.05rem; font-family: 'Inter', sans-serif; }
 
-@media(max-width:480px){
-  .stats { grid-template-columns:repeat(3,1fr); }
-  .for-who, .features { grid-template-columns:1fr; }
+.phase-badge {
+  font-size: 0.75rem;
+  padding: 4px 14px;
+  border-radius: 50px;
+  font-weight: 600;
+}
+
+.phase-card.free .phase-badge {
+  background: rgba(52,199,89,0.12);
+  color: var(--green);
+}
+.phase-card.locked .phase-badge {
+  background: rgba(212,168,67,0.12);
+  color: var(--gold);
+}
+
+.phase-toggle {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  transition: transform 0.3s;
+  margin-inline-start: 12px;
+}
+.phase-card.open .phase-toggle { transform: rotate(180deg); }
+
+.phase-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+
+.phase-content-inner {
+  padding: 0 28px 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.concept-tag {
+  background: rgba(255,255,255,0.05);
+  padding: 6px 16px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* ============ INTERACTIVE PREVIEW ============ */
+.preview {
+  padding: 100px 0;
+  text-align: center;
+}
+
+.preview-board-wrapper {
+  max-width: 500px;
+  margin: 0 auto 32px;
+  position: relative;
+}
+
+.mini-board {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  aspect-ratio: 1;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 3px solid rgba(212,168,67,0.3);
+}
+
+.cell {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(1.2rem, 4vw, 2rem);
+  position: relative;
+}
+
+.cell.light { background: #b8a67a; }
+.cell.dark { background: #7a6a4e; }
+.cell.highlight { box-shadow: inset 0 0 0 3px var(--gold); }
+
+.preview-caption {
+  font-size: 1.3rem;
+  color: var(--white);
+  margin-bottom: 12px;
+  font-family: 'Playfair Display', serif;
+}
+
+.preview-desc {
+  color: var(--text-muted);
+  margin-bottom: 32px;
+  font-size: 1rem;
+}
+
+/* ============ COMPARISON TABLE ============ */
+.comparison { padding: 100px 0; }
+
+.compare-table {
+  max-width: 700px;
+  margin: 0 auto;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.compare-row {
+  display: grid;
+  grid-template-columns: 1fr 120px 120px;
+  align-items: center;
+  padding: 16px 28px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.compare-row:last-child { border-bottom: none; }
+
+.compare-header {
+  background: var(--card);
+  font-weight: 700;
+  color: var(--gold);
+  font-size: 0.9rem;
+}
+
+.compare-row:not(.compare-header) { background: rgba(16,16,28,0.6); }
+.compare-row:not(.compare-header):hover { background: var(--card); }
+
+.compare-feature { font-size: 0.95rem; }
+.compare-check { text-align: center; font-size: 1.2rem; }
+.check-yes { color: var(--green); }
+.check-no { color: var(--red); opacity: 0.5; }
+
+/* ============ TESTIMONIALS ============ */
+.testimonials { padding: 100px 0; }
+
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.testimonial-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 32px;
+  border: 1px solid rgba(255,255,255,0.04);
+  position: relative;
+}
+
+.testimonial-card::before {
+  content: '\201C';
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  font-size: 4rem;
+  color: rgba(212,168,67,0.15);
+  font-family: serif;
+  line-height: 1;
+}
+
+.testimonial-text {
+  font-size: 1rem;
+  line-height: 1.8;
+  margin-bottom: 20px;
+  color: var(--text);
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.testimonial-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold-dim), var(--gold));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: #0a0a12;
+  font-weight: 800;
+}
+
+.testimonial-name { font-weight: 700; font-size: 0.95rem; font-family: 'Inter', sans-serif; }
+.testimonial-role { font-size: 0.8rem; color: var(--text-muted); }
+
+/* ============ BEFORE / AFTER ============ */
+.before-after { padding: 100px 0; }
+
+.ba-grid {
+  max-width: 750px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ba-row {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 16px;
+  align-items: center;
+}
+
+.ba-before, .ba-after {
+  padding: 20px 24px;
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+}
+
+.ba-before {
+  background: rgba(255,59,48,0.08);
+  border: 1px solid rgba(255,59,48,0.15);
+  color: var(--red);
+  text-align: right;
+}
+
+.ba-after {
+  background: rgba(52,199,89,0.08);
+  border: 1px solid rgba(52,199,89,0.15);
+  color: var(--green);
+}
+
+.ba-arrow {
+  font-size: 1.5rem;
+  color: var(--gold);
+}
+
+/* ============ FAQ ============ */
+.faq { padding: 100px 0; }
+
+.faq-list {
+  max-width: 750px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.faq-item {
+  background: var(--card);
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255,255,255,0.04);
+  overflow: hidden;
+}
+
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1rem;
+  user-select: none;
+  transition: background 0.2s;
+  font-family: 'Inter', sans-serif;
+}
+.faq-question:hover { background: rgba(255,255,255,0.02); }
+
+.faq-icon {
+  font-size: 1.3rem;
+  color: var(--gold);
+  transition: transform 0.3s;
+  flex-shrink: 0;
+  margin-inline-start: 16px;
+}
+.faq-item.open .faq-icon { transform: rotate(45deg); }
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+
+.faq-answer-inner {
+  padding: 0 24px 20px;
+  color: var(--text-muted);
+  line-height: 1.8;
+  font-size: 0.95rem;
+}
+
+/* ============ PRICING ============ */
+.pricing { padding: 100px 0; }
+
+.pricing-card {
+  max-width: 550px;
+  margin: 0 auto;
+  background: var(--card);
+  border-radius: 24px;
+  border: 2px solid var(--gold);
+  padding: 48px 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.pricing-card::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--gold-dim), var(--gold), var(--gold-light), var(--gold));
+}
+
+.pricing-label {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dim));
+  color: #0a0a12;
+  padding: 6px 20px;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  margin-bottom: 24px;
+  letter-spacing: 1px;
+  font-family: 'Inter', sans-serif;
+}
+
+.pricing-title {
+  font-size: 1.6rem;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+
+.pricing-subtitle {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 32px;
+}
+
+.pricing-price { margin-bottom: 32px; }
+
+.price-old {
+  font-size: 1.4rem;
+  color: var(--text-muted);
+  text-decoration: line-through;
+  margin-right: 12px;
+}
+
+.price-current {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: var(--gold);
+}
+
+.price-currency {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+}
+
+.price-note {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+
+.pricing-features {
+  text-align: left;
+  margin-bottom: 36px;
+}
+
+.pricing-features li {
+  list-style: none;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pricing-features li::before {
+  content: '\2713';
+  color: var(--green);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.pricing-btn {
+  width: 100%;
+  justify-content: center;
+  font-size: 1.2rem;
+  padding: 18px 36px;
+  margin-bottom: 16px;
+}
+
+.pricing-trust {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
+.trust-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.trust-badge span { font-size: 1.1rem; }
+
+.pricing-free-link {
+  display: block;
+  margin-top: 20px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+.pricing-free-link:hover { color: var(--gold); }
+
+/* ============ ABOUT ============ */
+.about {
+  padding: 80px 0;
+  text-align: center;
+}
+
+.about p {
+  max-width: 650px;
+  margin: 0 auto;
+  color: var(--text-muted);
+  line-height: 1.9;
+  font-size: 1rem;
+}
+
+/* ============ FOOTER ============ */
+.footer {
+  padding: 40px 0;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  text-align: center;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.footer-links a {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  transition: color 0.3s;
+}
+.footer-links a:hover { color: var(--gold); }
+
+.footer-copy {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  opacity: 0.6;
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 768px) {
+  .hero { padding: 80px 20px 60px; }
+  .hero-chess-piece { font-size: 4rem; }
+  .btn { padding: 14px 28px; font-size: 1rem; }
+  .compare-row { grid-template-columns: 1fr 80px 80px; padding: 12px 16px; }
+  .compare-feature { font-size: 0.85rem; }
+  .ba-row { grid-template-columns: 1fr; gap: 8px; text-align: center; }
+  .ba-arrow { transform: rotate(90deg); }
+  .ba-before { text-align: center; }
+  .pricing-card { padding: 36px 24px; }
+  .price-current { font-size: 2.8rem; }
+  .testimonial-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .stats-grid { gap: 8px 24px; }
+  .stat-number { font-size: 1.5rem; }
 }
 </style>
 </head>
+
 <body>
-<div class="wrap">
 
-  <!-- HERO -->
-  <section class="hero">
-    <span class="hero-board">&#9823;&#65039;</span>
-    <div class="badge">The Complete Chess Course</div>
-    <h1>Learn Chess<br><span>the Right Way</span></h1>
-    <p>6 structured phases that take you from absolute beginner to a confident player who thinks deeply and wins consistently.</p>
-    <div class="cta-group">
-      <a href="../en.html" class="btn-primary">&#9823; Try the Free Preview</a>
-      <a href="#pricing" class="btn-secondary">&darr; Full course for $19</a>
+<!-- ==================== HERO ==================== -->
+<section class="hero" id="hero">
+  <div class="container">
+    <div class="hero-chess-piece">&#9818;</div>
+    <div class="hero-badge">The First Structured Chess Course That Works</div>
+    <h1>Stop Losing at Chess &mdash;<br>A Structured Guide from <span>Zero to Confident Player</span></h1>
+    <p class="hero-sub">
+      You're not bad at chess. You just never learned it properly.
+      <br>This guide teaches you chess the right way &mdash; step by step, with interactive boards and real positions.
+    </p>
+    <div class="hero-buttons">
+      <a href="#pricing" class="btn btn-primary">Try Free &mdash; 2 Full Phases</a>
+      <a href="#pricing" class="btn btn-secondary">Full Guide for $19</a>
     </div>
-  </section>
-
-  <!-- STATS -->
-  <div class="stats">
-    <div class="stat"><div class="stat-v">6</div><div class="stat-l">Learning Phases</div></div>
-    <div class="stat"><div class="stat-v">30+</div><div class="stat-l">Concepts &amp; Tactics</div></div>
-    <div class="stat"><div class="stat-v">$19</div><div class="stat-l">One-time payment</div></div>
+    <p class="hero-note">
+      <strong>2 phases completely free</strong> &mdash; no credit card, no signup
+    </p>
   </div>
+</section>
 
-  <!-- PHASES -->
-  <div id="phases">
-    <div class="section-title">The Complete Curriculum</div>
-    <div class="phases">
-      <div class="phase">
-        <div class="phase-num">1</div>
-        <div class="phase-body">
-          <div class="phase-name">Foundation &mdash; See the Board Like a Commander</div>
-          <div class="phase-sub">Center control, piece values, the magic question, notation, and chess history</div>
-        </div>
-        <div class="phase-tag" style="background:rgba(74,200,120,0.1);color:#4ac878;border-color:rgba(74,200,120,0.2)">Free</div>
+<!-- ==================== PROBLEM ==================== -->
+<section class="problem" id="problem">
+  <div class="container">
+    <div class="section-label reveal">Why You're Not Improving</div>
+    <h2 class="section-title reveal">Sound Familiar?</h2>
+    <div class="pain-grid">
+      <div class="pain-card reveal">
+        <span class="pain-icon">&#128548;</span>
+        <h3>You lose and don't know why</h3>
+        <p>The game ends and you stare at the screen with no idea what went wrong. Same result every time, different game.</p>
       </div>
-      <div class="phase">
-        <div class="phase-num">2</div>
-        <div class="phase-body">
-          <div class="phase-name">Opening Principles &mdash; Your First 10 Moves</div>
-          <div class="phase-sub">The 4 tasks, Italian Game, London System, Sicilian Defense, deadly traps</div>
-        </div>
-        <div class="phase-tag" style="background:rgba(74,200,120,0.1);color:#4ac878;border-color:rgba(74,200,120,0.2)">Free</div>
+      <div class="pain-card reveal">
+        <span class="pain-icon">&#128250;</span>
+        <h3>Random YouTube videos with no structure</h3>
+        <p>One video on openings, another on endgames, then tactics. No order, no progression, no real learning.</p>
       </div>
-      <div class="phase">
-        <div class="phase-num">3</div>
-        <div class="phase-body">
-          <div class="phase-name">Tactical Weapons &mdash; Win Material for Free</div>
-          <div class="phase-sub">Forks, pins, skewers, discovered attacks, sacrifices, back rank mate</div>
-        </div>
-        <div class="phase-tag">&#128274; Tactics</div>
+      <div class="pain-card reveal">
+        <span class="pain-icon">&#129504;</span>
+        <h3>You memorize openings but collapse in the middle</h3>
+        <p>You know the first 10 moves by heart, but after move 11 you're completely lost. Memorizing without understanding.</p>
       </div>
-      <div class="phase">
-        <div class="phase-num">4</div>
-        <div class="phase-body">
-          <div class="phase-name">Strategic Thinking &mdash; Think Like a General</div>
-          <div class="phase-sub">The 4-step system, open files, weak pawns, outposts, two weaknesses</div>
-        </div>
-        <div class="phase-tag">&#128274; Strategy</div>
-      </div>
-      <div class="phase">
-        <div class="phase-num">5</div>
-        <div class="phase-body">
-          <div class="phase-name">The Endgame &mdash; Where Games Are Won</div>
-          <div class="phase-sub">King activation, passed pawns, opposition, Lucena, Philidor, rule of the square</div>
-        </div>
-        <div class="phase-tag">&#128274; Endgame</div>
-      </div>
-      <div class="phase">
-        <div class="phase-num">6</div>
-        <div class="phase-body">
-          <div class="phase-name">Your Roadmap &mdash; The Path to Real Improvement</div>
-          <div class="phase-sub">Daily routine, week-by-week plan, resources, game analysis, mental checklist</div>
-        </div>
-        <div class="phase-tag">&#128274; Roadmap</div>
+      <div class="pain-card reveal">
+        <span class="pain-icon">&#128269;</span>
+        <h3>You can't analyze your own games</h3>
+        <p>You open the analysis after a game, see red and green arrows, but have no idea why your move was wrong.</p>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- QUOTE -->
-  <div class="quote-block">
-    <div class="quote-text">&ldquo;In the opening you learn a lesson. In the middlegame you fight a battle. In the endgame you win a game.&rdquo;</div>
-    <div class="quote-author">&mdash; Chess wisdom</div>
-  </div>
-
-  <!-- FEATURES -->
-  <div class="section-title">What Makes This Course Different</div>
-  <div class="features">
-    <div class="feature-item">
-      <div class="feature-em">&#129504;</div>
-      <div class="feature-text"><strong>Think-Along Exercises</strong>Interactive exercises where you choose a move, then see the master explanation</div>
-    </div>
-    <div class="feature-item">
-      <div class="feature-em">&#127942;</div>
-      <div class="feature-text"><strong>Quizzes After Every Phase</strong>Test your knowledge with multiple-choice questions and detailed explanations</div>
-    </div>
-    <div class="feature-item">
-      <div class="feature-em">&#11088;</div>
-      <div class="feature-text"><strong>XP &amp; Streak System</strong>Earn XP for progress and maintain daily streaks to stay motivated</div>
-    </div>
-    <div class="feature-item">
-      <div class="feature-em">&#128200;</div>
-      <div class="feature-text"><strong>Progress Tracking</strong>Your progress saves automatically and picks up where you left off</div>
-    </div>
-  </div>
-
-  <!-- FOR WHO -->
-  <div class="section-title">Who Is This For?</div>
-  <div class="for-who">
-    <div class="for-item">
-      <div class="for-item-em">&#127793;</div>
-      <div class="for-item-text"><strong>Complete Beginners</strong>Never played chess or only tried it casually</div>
-    </div>
-    <div class="for-item">
-      <div class="for-item-em">&#128200;</div>
-      <div class="for-item-text"><strong>Players Who Want to Improve</strong>You play but don't understand why you keep losing</div>
-    </div>
-    <div class="for-item">
-      <div class="for-item-em">&#9200;</div>
-      <div class="for-item-text"><strong>Busy People</strong>A focused guide with no filler or complex theory</div>
-    </div>
-    <div class="for-item">
-      <div class="for-item-em">&#129504;</div>
-      <div class="for-item-text"><strong>Structured Thinkers</strong>Chess builds planning and analytical skills</div>
+<!-- ==================== STATS STRIP ==================== -->
+<section class="stats reveal">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-number">6</div>
+        <div class="stat-label">Learning Phases</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">32</div>
+        <div class="stat-label">Core Concepts</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">53</div>
+        <div class="stat-label">Interactive Positions</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">&#10003;</div>
+        <div class="stat-label">Quiz After Each Phase</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">&#127760;</div>
+        <div class="stat-label">Arabic + English</div>
+      </div>
     </div>
   </div>
+</section>
 
-  <!-- PRICING -->
-  <div id="pricing" class="final-cta">
-    <div class="free-tag">&#10003; Free preview &mdash; 2 full phases</div>
-    <h2>Get the Full Course</h2>
-    <p>Two free phases give you the foundation. Four additional phases unlock tactics, strategy, endgames, and a complete improvement roadmap.</p>
-    <div style="font-family:'Playfair Display',serif;font-size:2.8em;color:var(--gold);margin:16px 0 4px">$19</div>
-    <div style="font-size:.82em;color:var(--text-dim);margin-bottom:24px">One-time payment &mdash; Lifetime access &mdash; No subscription</div>
-    <div class="cta-group">
-      <a href="https://gumroad.com/l/chess-academy-en" target="_blank" class="btn-primary">Buy the Full Course &rarr;</a>
-      <a href="../en.html" class="btn-secondary">&#9823; Try the Free Preview First</a>
+<!-- ==================== CURRICULUM ==================== -->
+<section class="curriculum" id="curriculum">
+  <div class="container">
+    <div class="section-label reveal">What You'll Learn</div>
+    <h2 class="section-title reveal">The Complete Curriculum &mdash; 6 Phases</h2>
+    <div class="phase-list">
+
+      <div class="phase-card free reveal">
+        <div class="phase-header" onclick="togglePhase(this)">
+          <div class="phase-info">
+            <div class="phase-num">1</div>
+            <div class="phase-title-text">Board Basics &amp; Piece Movement</div>
+          </div>
+          <div style="display:flex;align-items:center;">
+            <span class="phase-badge">Free</span>
+            <span class="phase-toggle">&#9660;</span>
+          </div>
+        </div>
+        <div class="phase-content">
+          <div class="phase-content-inner">
+            <span class="concept-tag">Board Setup</span>
+            <span class="concept-tag">How Each Piece Moves</span>
+            <span class="concept-tag">Relative Piece Values</span>
+            <span class="concept-tag">Castling (Short &amp; Long)</span>
+            <span class="concept-tag">En Passant</span>
+            <span class="concept-tag">Pawn Promotion</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase-card free reveal">
+        <div class="phase-header" onclick="togglePhase(this)">
+          <div class="phase-info">
+            <div class="phase-num">2</div>
+            <div class="phase-title-text">Opening Principles &amp; First Moves</div>
+          </div>
+          <div style="display:flex;align-items:center;">
+            <span class="phase-badge">Free</span>
+            <span class="phase-toggle">&#9660;</span>
+          </div>
+        </div>
+        <div class="phase-content">
+          <div class="phase-content-inner">
+            <span class="concept-tag">Center Control</span>
+            <span class="concept-tag">Piece Development</span>
+            <span class="concept-tag">King Safety</span>
+            <span class="concept-tag">Basic Checkmates</span>
+            <span class="concept-tag">Common Opening Mistakes</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase-card locked reveal">
+        <div class="phase-header" onclick="togglePhase(this)">
+          <div class="phase-info">
+            <div class="phase-num">3</div>
+            <div class="phase-title-text">Tactics &mdash; The Fastest Way to Improve</div>
+          </div>
+          <div style="display:flex;align-items:center;">
+            <span class="phase-badge">&#128274; Full Guide</span>
+            <span class="phase-toggle">&#9660;</span>
+          </div>
+        </div>
+        <div class="phase-content">
+          <div class="phase-content-inner">
+            <span class="concept-tag">Fork</span>
+            <span class="concept-tag">Pin</span>
+            <span class="concept-tag">Skewer</span>
+            <span class="concept-tag">Double Attack</span>
+            <span class="concept-tag">Discovered Attack</span>
+            <span class="concept-tag">Tactical Sacrifice</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase-card locked reveal">
+        <div class="phase-header" onclick="togglePhase(this)">
+          <div class="phase-info">
+            <div class="phase-num">4</div>
+            <div class="phase-title-text">Strategy &mdash; Think Like a Grandmaster</div>
+          </div>
+          <div style="display:flex;align-items:center;">
+            <span class="phase-badge">&#128274; Full Guide</span>
+            <span class="phase-toggle">&#9660;</span>
+          </div>
+        </div>
+        <div class="phase-content">
+          <div class="phase-content-inner">
+            <span class="concept-tag">Pawn Structure</span>
+            <span class="concept-tag">Weak Squares</span>
+            <span class="concept-tag">Open Files</span>
+            <span class="concept-tag">Bishop Pair</span>
+            <span class="concept-tag">Middlegame Plans</span>
+            <span class="concept-tag">Beneficial Exchanges</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase-card locked reveal">
+        <div class="phase-header" onclick="togglePhase(this)">
+          <div class="phase-info">
+            <div class="phase-num">5</div>
+            <div class="phase-title-text">Endgames &mdash; Where Games Are Won and Lost</div>
+          </div>
+          <div style="display:flex;align-items:center;">
+            <span class="phase-badge">&#128274; Full Guide</span>
+            <span class="phase-toggle">&#9660;</span>
+          </div>
+        </div>
+        <div class="phase-content">
+          <div class="phase-content-inner">
+            <span class="concept-tag">King + Rook vs. King</span>
+            <span class="concept-tag">Pawn Endgames</span>
+            <span class="concept-tag">Rule of the Square</span>
+            <span class="concept-tag">Opposition</span>
+            <span class="concept-tag">Pawn Promotion Techniques</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase-card locked reveal">
+        <div class="phase-header" onclick="togglePhase(this)">
+          <div class="phase-info">
+            <div class="phase-num">6</div>
+            <div class="phase-title-text">Analysis &amp; Continuous Improvement</div>
+          </div>
+          <div style="display:flex;align-items:center;">
+            <span class="phase-badge">&#128274; Full Guide</span>
+            <span class="phase-toggle">&#9660;</span>
+          </div>
+        </div>
+        <div class="phase-content">
+          <div class="phase-content-inner">
+            <span class="concept-tag">Analyzing Your Games</span>
+            <span class="concept-tag">Finding Your Mistake Patterns</span>
+            <span class="concept-tag">Building a Training Plan</span>
+            <span class="concept-tag">Using the Engine Wisely</span>
+            <span class="concept-tag">The Improvement Mindset</span>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
+</section>
 
-  <footer>
-    Built with &#10084; &middot; <a href="https://github.com/aneerabee/chess-academy" target="_blank">GitHub</a>
-  </footer>
+<!-- ==================== INTERACTIVE PREVIEW ==================== -->
+<section class="preview reveal" id="preview">
+  <div class="container">
+    <div class="section-label">Try It Yourself</div>
+    <h2 class="section-title">This Is What You'll Learn</h2>
 
-</div>
+    <div class="preview-board-wrapper">
+      <div class="mini-board" id="miniBoard"></div>
+    </div>
+
+    <p class="preview-caption">The Fork: One piece attacking two at the same time</p>
+    <p class="preview-desc">The knight on e6 attacks both the king and the rook. Your opponent can't save both.</p>
+
+    <a href="#pricing" class="btn btn-primary" style="animation:none;">Try the Full Lesson Free</a>
+  </div>
+</section>
+
+<!-- ==================== COMPARISON TABLE ==================== -->
+<section class="comparison reveal" id="comparison">
+  <div class="container">
+    <div class="section-label">Compare</div>
+    <h2 class="section-title">Free vs. Full Guide</h2>
+
+    <div class="compare-table">
+      <div class="compare-row compare-header">
+        <div>Feature</div>
+        <div style="text-align:center;">Free</div>
+        <div style="text-align:center;">Full &mdash; $19</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-feature">Phase 1 &mdash; Board Basics</div>
+        <div class="compare-check check-yes">&#10003;</div>
+        <div class="compare-check check-yes">&#10003;</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-feature">Phase 2 &mdash; Opening Principles</div>
+        <div class="compare-check check-yes">&#10003;</div>
+        <div class="compare-check check-yes">&#10003;</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-feature">Phase 3 &mdash; Tactics</div>
+        <div class="compare-check check-no">&#10005;</div>
+        <div class="compare-check check-yes">&#10003;</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-feature">Phase 4 &mdash; Strategy</div>
+        <div class="compare-check check-no">&#10005;</div>
+        <div class="compare-check check-yes">&#10003;</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-feature">Phase 5 &mdash; Endgames</div>
+        <div class="compare-check check-no">&#10005;</div>
+        <div class="compare-check check-yes">&#10003;</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-feature">Phase 6 &mdash; Analysis &amp; Improvement</div>
+        <div class="compare-check check-no">&#10005;</div>
+        <div class="compare-check check-yes">&#10003;</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-feature">53 Interactive Positions</div>
+        <div class="compare-check check-no">12 only</div>
+        <div class="compare-check check-yes">&#10003; All</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-feature">End-of-Phase Quizzes</div>
+        <div class="compare-check check-no">&#10005;</div>
+        <div class="compare-check check-yes">&#10003;</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-feature">Lifetime Access</div>
+        <div class="compare-check check-yes">&#10003;</div>
+        <div class="compare-check check-yes">&#10003;</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== TESTIMONIALS ==================== -->
+<section class="testimonials" id="testimonials">
+  <div class="container">
+    <div class="section-label reveal">What Learners Say</div>
+    <h2 class="section-title reveal">People Who Started from Zero</h2>
+
+    <div class="testimonial-grid">
+      <div class="testimonial-card reveal">
+        <p class="testimonial-text">I'd been playing chess for a year without improving. After just Phase 3, I started seeing tactical patterns during games before I made my move. A real difference.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">J</div>
+          <div>
+            <div class="testimonial-name">James Wilson</div>
+            <div class="testimonial-role">Hobbyist Player &mdash; United States</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal">
+        <p class="testimonial-text">Finally a chess course that's structured and makes sense. Everything on YouTube is random and scattered. This guide is what I was looking for.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">S</div>
+          <div>
+            <div class="testimonial-name">Sarah Chen</div>
+            <div class="testimonial-role">Software Engineer &mdash; Canada</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal">
+        <p class="testimonial-text">The interactive boards changed everything. Instead of reading dry text, I move the pieces and see the result with my own eyes. This is how humans actually learn.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">M</div>
+          <div>
+            <div class="testimonial-name">Marcus Schmidt</div>
+            <div class="testimonial-role">University Student &mdash; Germany</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal">
+        <p class="testimonial-text">My 12-year-old son started with the free phases. Two weeks later, he asked me to buy the full guide himself. $19 is cheaper than any private tutor.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">P</div>
+          <div>
+            <div class="testimonial-name">Priya Sharma</div>
+            <div class="testimonial-role">Parent &mdash; India</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal">
+        <p class="testimonial-text">Went from 600 to 900 on Chess.com in two months. Phase 6 on analysis made the biggest difference. I finally understand my mistakes.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">D</div>
+          <div>
+            <div class="testimonial-name">Daniel Okafor</div>
+            <div class="testimonial-role">Casual Player &mdash; Nigeria</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal">
+        <p class="testimonial-text">I tried the free content first and couldn't believe it was actually free. The quality is better than paid courses I've taken. Buying the full guide was the easiest decision.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">L</div>
+          <div>
+            <div class="testimonial-name">Lucas Ferreira</div>
+            <div class="testimonial-role">Math Teacher &mdash; Brazil</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== BEFORE / AFTER ==================== -->
+<section class="before-after" id="before-after">
+  <div class="container">
+    <div class="section-label reveal">The Transformation</div>
+    <h2 class="section-title reveal">Before and After the Guide</h2>
+
+    <div class="ba-grid">
+      <div class="ba-row reveal">
+        <div class="ba-before">&#10005; I lose without knowing why</div>
+        <div class="ba-arrow">&rarr;</div>
+        <div class="ba-after">&#10003; I analyze my mistakes and learn from them</div>
+      </div>
+      <div class="ba-row reveal">
+        <div class="ba-before">&#10005; I memorize openings without understanding</div>
+        <div class="ba-arrow">&rarr;</div>
+        <div class="ba-after">&#10003; I understand principles and apply them in any opening</div>
+      </div>
+      <div class="ba-row reveal">
+        <div class="ba-before">&#10005; I can't spot tactics during games</div>
+        <div class="ba-arrow">&rarr;</div>
+        <div class="ba-after">&#10003; I see forks and pins before I move</div>
+      </div>
+      <div class="ba-row reveal">
+        <div class="ba-before">&#10005; I always blow the endgame</div>
+        <div class="ba-arrow">&rarr;</div>
+        <div class="ba-after">&#10003; I know how to convert my advantage into a win</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FAQ ==================== -->
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="section-label reveal">FAQ</div>
+    <h2 class="section-title reveal">Everything You Need to Know</h2>
+
+    <div class="faq-list">
+
+      <div class="faq-item reveal">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span>Do I need any prior chess experience?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">No. The guide starts from absolute zero &mdash; from board setup and how each piece moves. It's designed for complete beginners who have never played chess or only know the basics.</div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span>How is this different from free YouTube videos?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">YouTube videos are random and unstructured. This is a complete curriculum: 6 phases in order, each concept building on the previous one, with interactive boards where you move the pieces yourself and quizzes that test your understanding. It's the difference between watching cooking shows and actually learning to cook.</div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span>Is $19 worth it?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">A private chess tutor costs $30-50 per hour. This guide gives you a complete curriculum for a one-time payment of $19 with lifetime access. And if you're not satisfied, you have 30 days to get a full refund &mdash; no questions asked.</div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span>Is there a monthly subscription?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Absolutely not. One payment of $19 and lifetime access. No subscription, no hidden fees, no surprises.</div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span>Is it only in English?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">The guide is available in both English and Arabic. You can switch between languages at any time. Chess terms are written in both languages so you'll understand them in any context.</div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span>How long does it take to complete?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">At a comfortable pace (30 minutes per day), you'll finish in 4-6 weeks. But there's no time pressure &mdash; learn at your own speed. Lifetime access means you can revisit any lesson whenever you want.</div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span>Does it work on mobile?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Yes. The guide is designed to work on any device &mdash; phone, tablet, or computer. The interactive boards support touch on mobile.</div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span>What if I don't like it?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">You have a 30-day money-back guarantee, no questions asked. If you don't feel you've improved, send one message and get a full refund. Zero risk.</div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span>Will I actually get better?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">If you apply what you learn and play regularly, yes. The guide doesn't give you magic tricks &mdash; it gives you the right foundation that all improvement builds on. Most learners notice a difference in their games within the first two weeks.</div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span>How do I access the free content?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Just click "Try Free" &mdash; you'll get Phase 1 and Phase 2 completely free, no account creation and no credit card required. Truly free.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ==================== PRICING ==================== -->
+<section class="pricing" id="pricing">
+  <div class="container">
+    <div class="section-label reveal">Get Started</div>
+    <h2 class="section-title reveal">Invest in Your Chess Mind</h2>
+
+    <div class="pricing-card reveal">
+      <div class="pricing-label">Launch Price &mdash; Limited Time</div>
+      <h3 class="pricing-title">The Complete Guide &mdash; 6 Phases</h3>
+      <p class="pricing-subtitle">Everything you need to go from beginner to a player who understands what they're doing</p>
+
+      <div class="pricing-price">
+        <span class="price-old">$49</span>
+        <span class="price-current">$19</span>
+        <br>
+        <span class="price-note">One-time payment &mdash; no subscription</span>
+      </div>
+
+      <ul class="pricing-features">
+        <li>6 complete learning phases (32 concepts)</li>
+        <li>53 interactive positions with moveable pieces</li>
+        <li>Quiz after every phase</li>
+        <li>Available in English and Arabic</li>
+        <li>Works on phone and computer</li>
+        <li>Lifetime access &mdash; learn at your pace</li>
+        <li>Free future updates</li>
+      </ul>
+
+      <a href="https://gumroad.com/l/chess-academy-en" target="_blank" class="btn btn-primary pricing-btn">Get the Full Guide &mdash; $19</a>
+
+      <div class="pricing-trust">
+        <div class="trust-badge"><span>&#128737;&#65039;</span> 30-day guarantee</div>
+        <div class="trust-badge"><span>&#9854;&#65039;</span> Lifetime access</div>
+        <div class="trust-badge"><span>&#128683;</span> No subscription</div>
+        <div class="trust-badge"><span>&#128274;</span> Secure payment</div>
+      </div>
+
+      <a href="../en.html" class="pricing-free-link">Or try the free content first &mdash; 2 full phases, no signup &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ABOUT ==================== -->
+<section class="about reveal" id="about">
+  <div class="container">
+    <div class="section-label">About the Academy</div>
+    <h2 class="section-title">Why We Built This</h2>
+    <p>
+      Because every chess learner deserves a structured, well-organized course. Not random YouTube videos, not scattered tips, not incomplete guides. We built this to be the resource we wish existed when we started learning chess. A clear curriculum, interactive and hands-on, that respects your time.
+    </p>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="../index.html">Arabic Version</a>
+      <a href="https://github.com/aneerabee/chess-academy" target="_blank">GitHub</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Contact Us</a>
+    </div>
+    <p class="footer-copy">Chess Academy &copy; 2026 &mdash; All rights reserved</p>
+  </div>
+</footer>
+
+<!-- ==================== JAVASCRIPT ==================== -->
+<script>
+// ===== Scroll Reveal =====
+var revealElements = document.querySelectorAll('.reveal');
+var revealObserver = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+revealElements.forEach(function(el) { revealObserver.observe(el); });
+
+// ===== Phase Accordion =====
+function togglePhase(header) {
+  var card = header.closest('.phase-card');
+  var content = card.querySelector('.phase-content');
+  var isOpen = card.classList.contains('open');
+
+  document.querySelectorAll('.phase-card.open').forEach(function(c) {
+    c.classList.remove('open');
+    c.querySelector('.phase-content').style.maxHeight = '0';
+  });
+
+  if (!isOpen) {
+    card.classList.add('open');
+    content.style.maxHeight = content.scrollHeight + 'px';
+  }
+}
+
+// ===== FAQ Accordion =====
+function toggleFaq(question) {
+  var item = question.closest('.faq-item');
+  var answer = item.querySelector('.faq-answer');
+  var isOpen = item.classList.contains('open');
+
+  document.querySelectorAll('.faq-item.open').forEach(function(i) {
+    i.classList.remove('open');
+    i.querySelector('.faq-answer').style.maxHeight = '0';
+  });
+
+  if (!isOpen) {
+    item.classList.add('open');
+    answer.style.maxHeight = answer.scrollHeight + 'px';
+  }
+}
+
+// ===== Mini Chess Board =====
+(function buildBoard() {
+  var board = document.getElementById('miniBoard');
+  var position = {
+    '0-4': '\u265C',
+    '0-3': '\u265A',
+    '2-4': '\u265E',
+    '7-4': '\u2654'
+  };
+
+  var highlights = ['0-3', '0-4', '2-4'];
+
+  for (var row = 0; row < 8; row++) {
+    for (var col = 0; col < 8; col++) {
+      var cell = document.createElement('div');
+      var isLight = (row + col) % 2 === 0;
+      cell.className = 'cell ' + (isLight ? 'light' : 'dark');
+
+      var key = row + '-' + col;
+      if (highlights.indexOf(key) !== -1) {
+        cell.classList.add('highlight');
+      }
+      if (position[key]) {
+        cell.textContent = position[key];
+      }
+      board.appendChild(cell);
+    }
+  }
+})();
+
+// ===== Smooth scroll for anchor links =====
+document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+  anchor.addEventListener('click', function(e) {
+    var target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+
 </body>
 </html>

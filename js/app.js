@@ -191,10 +191,18 @@
   // ─── Lessons Data ───────────────────────────────────────────────────────────
 
   function getLessons() {
+    // Try English first (if loaded), then Arabic
+    if (typeof LESSONS_EN !== 'undefined' && Array.isArray(LESSONS_EN)) {
+      return LESSONS_EN;
+    }
     if (typeof LESSONS_AR !== 'undefined' && Array.isArray(LESSONS_AR)) {
       return LESSONS_AR;
     }
     return null;
+  }
+
+  function isEnglish() {
+    return typeof LESSONS_EN !== 'undefined' && Array.isArray(LESSONS_EN);
   }
 
   // ─── Progress Calculations ──────────────────────────────────────────────────
