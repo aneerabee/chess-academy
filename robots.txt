@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://aneerabee.github.io/chess-academy/sitemap.xml

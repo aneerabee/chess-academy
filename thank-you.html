@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>شكراً لثقتك! — أكاديمية الشطرنج</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #080810;
+  --card: #10101c;
+  --card-hover: #181830;
+  --gold: #d4a843;
+  --gold-light: #f0d078;
+  --gold-dim: #a07820;
+  --text: #e8e8f0;
+  --text-muted: #8888a0;
+  --green: #34c759;
+  --white: #ffffff;
+  --radius: 16px;
+  --radius-sm: 10px;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: 'Tajawal', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  direction: rtl;
+  line-height: 1.7;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+}
+
+h1, h2, h3 { font-family: 'Amiri', serif; }
+a { color: var(--gold); text-decoration: none; }
+a:hover { color: var(--gold-light); }
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Hero */
+.thank-hero {
+  text-align: center;
+  padding: 80px 24px 40px;
+}
+
+.thank-icon {
+  font-size: 5rem;
+  display: block;
+  margin-bottom: 24px;
+  animation: float 4s ease-in-out infinite;
+  filter: drop-shadow(0 0 40px rgba(212,168,67,0.3));
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.thank-hero h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+
+.thank-hero p {
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+/* Access Code Box */
+.code-section {
+  padding: 48px 0;
+}
+
+.code-card {
+  background: var(--card);
+  border: 2px solid var(--gold);
+  border-radius: var(--radius);
+  padding: 40px 32px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.code-card::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--gold-dim), var(--gold), var(--gold-light), var(--gold));
+}
+
+.code-label {
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.code-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.code-value {
+  font-family: 'Courier New', monospace;
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  font-weight: 800;
+  color: var(--gold);
+  background: rgba(212,168,67,0.08);
+  border: 2px dashed rgba(212,168,67,0.3);
+  border-radius: var(--radius-sm);
+  padding: 16px 32px;
+  letter-spacing: 4px;
+  user-select: all;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  direction: ltr;
+}
+
+.code-value:hover {
+  background: rgba(212,168,67,0.15);
+  border-color: var(--gold);
+}
+
+.copy-btn {
+  background: linear-gradient(135deg, var(--gold), var(--gold-dim));
+  color: #0a0a12;
+  border: none;
+  border-radius: 50px;
+  padding: 12px 24px;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.copy-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(212,168,67,0.3);
+}
+
+.copy-btn.copied {
+  background: var(--green);
+}
+
+.code-note {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 8px;
+}
+
+/* Steps */
+.steps-section {
+  padding: 48px 0;
+}
+
+.steps-title {
+  text-align: center;
+  font-size: 1.8rem;
+  color: var(--white);
+  margin-bottom: 40px;
+}
+
+.steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.step-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  border: 1px solid rgba(255,255,255,0.04);
+  padding: 28px 32px;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  transition: all 0.3s ease;
+}
+
+.step-card:hover {
+  border-color: rgba(212,168,67,0.2);
+  transform: translateY(-2px);
+}
+
+.step-num {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  border-radius: 50%;
+  background: rgba(212,168,67,0.15);
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.2rem;
+}
+
+.step-content h3 {
+  font-family: 'Tajawal', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+
+.step-content p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+/* CTA */
+.cta-section {
+  padding: 60px 0 40px;
+  text-align: center;
+}
+
+.btn-start {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 48px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dim));
+  color: #0a0a12;
+  border-radius: 50px;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 800;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  animation: pulse 2.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(212,168,67,0.4); }
+  50% { box-shadow: 0 0 0 16px rgba(212,168,67,0); }
+}
+
+.btn-start:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(212,168,67,0.35);
+  color: #0a0a12;
+}
+
+/* Support */
+.support-section {
+  padding: 40px 0 80px;
+  text-align: center;
+}
+
+.support-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  border: 1px solid rgba(255,255,255,0.04);
+  padding: 32px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.support-card h3 {
+  font-family: 'Tajawal', sans-serif;
+  font-size: 1.1rem;
+  color: var(--white);
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.support-card p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+.support-card a {
+  color: var(--gold);
+  font-weight: 600;
+}
+
+/* Footer */
+.footer {
+  padding: 32px 0;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  text-align: center;
+}
+
+.footer p {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  opacity: 0.6;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .thank-hero { padding: 60px 20px 30px; }
+  .thank-icon { font-size: 3.5rem; }
+  .code-value { font-size: 1.5rem; padding: 12px 20px; letter-spacing: 2px; }
+  .step-card { padding: 20px; gap: 14px; }
+  .step-num { width: 40px; height: 40px; min-width: 40px; font-size: 1rem; }
+  .btn-start { padding: 16px 36px; font-size: 1.1rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="thank-hero">
+  <span class="thank-icon">&#9818;</span>
+  <h1>شكراً لثقتك!</h1>
+  <p>تهانينا على قرارك. أنت الآن تملك الدليل الكامل لأكاديمية الشطرنج — 6 مراحل، 32 مفهوم، و53 وضعية تفاعلية.</p>
+</section>
+
+<!-- ACCESS CODE -->
+<section class="code-section">
+  <div class="container">
+    <div class="code-card">
+      <p class="code-label">رمز التفعيل الخاص بك</p>
+      <div class="code-box">
+        <span class="code-value" id="accessCode" title="انقر للنسخ">CHESSMIND2026</span>
+        <button class="copy-btn" id="copyBtn" onclick="copyCode()">نسخ الرمز</button>
+      </div>
+      <p class="code-note">احتفظ بهذا الرمز — ستحتاجه لفتح المحتوى المقفل في التطبيق</p>
+    </div>
+  </div>
+</section>
+
+<!-- ACTIVATION STEPS -->
+<section class="steps-section">
+  <div class="container">
+    <h2 class="steps-title">خطوات التفعيل</h2>
+    <div class="steps-list">
+
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h3>افتح التطبيق</h3>
+          <p>اضغط على الزر أدناه لفتح تطبيق أكاديمية الشطرنج مباشرة.</p>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h3>أكمل المرحلتين المجانيتين (أو تخطاهما)</h3>
+          <p>المرحلة الأولى والثانية مجانيتان للجميع. تستطيع إكمالهما أو تخطيهما مباشرة إلى المحتوى المدفوع.</p>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h3>عند الوصول للمحتوى المقفل، أدخل الرمز</h3>
+          <p>عندما تصل إلى المرحلة الثالثة أو أي محتوى مقفل، ستظهر لك خانة لإدخال رمز التفعيل. أدخل الرمز أعلاه.</p>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h3>ستُفتح لك كل المراحل فوراً</h3>
+          <p>بمجرد إدخال الرمز الصحيح، ستُفتح لك جميع المراحل الستة والمحتوى الكامل — بدون أي خطوات إضافية.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <a href="app.html" class="btn-start">&#9823; ابدأ التعلم الآن</a>
+  </div>
+</section>
+
+<!-- SUPPORT -->
+<section class="support-section">
+  <div class="container">
+    <div class="support-card">
+      <h3>تحتاج مساعدة؟</h3>
+      <p>
+        إذا واجهت أي مشكلة في التفعيل أو لديك أي سؤال، تواصل معنا عبر البريد الإلكتروني:
+        <br><a href="mailto:support@chess-academy.com">support@chess-academy.com</a>
+        <br><br>نرد خلال 24 ساعة عادةً.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <p>أكاديمية الشطرنج &copy; 2026 — جميع الحقوق محفوظة</p>
+  </div>
+</footer>
+
+<script>
+function copyCode() {
+  const code = document.getElementById('accessCode').textContent;
+  const btn = document.getElementById('copyBtn');
+
+  navigator.clipboard.writeText(code).then(function() {
+    btn.textContent = 'تم النسخ!';
+    btn.classList.add('copied');
+    setTimeout(function() {
+      btn.textContent = 'نسخ الرمز';
+      btn.classList.remove('copied');
+    }, 2000);
+  }).catch(function() {
+    // Fallback for older browsers
+    var textArea = document.createElement('textarea');
+    textArea.value = code;
+    textArea.style.position = 'fixed';
+    textArea.style.left = '-9999px';
+    document.body.appendChild(textArea);
+    textArea.select();
+    try {
+      document.execCommand('copy');
+      btn.textContent = 'تم النسخ!';
+      btn.classList.add('copied');
+      setTimeout(function() {
+        btn.textContent = 'نسخ الرمز';
+        btn.classList.remove('copied');
+      }, 2000);
+    } catch (err) {
+      btn.textContent = 'فشل النسخ';
+    }
+    document.body.removeChild(textArea);
+  });
+}
+</script>
+
+</body>
+</html>
