@@ -65,14 +65,14 @@ const LESSONS_EN = [
         quiz: [
           {
             question: 'What is the name of the square in White\u2019s bottom-right corner?',
-            options: ['a1', 'h1', 'h8', 'a8'],
-            correct: 1,
+            options: ['h1', 'a1', 'h8', 'a8'],
+            correct: 0,
             explanation: 'h1 is the square in White\u2019s bottom-right corner. It is always a light square \u2014 an important rule to verify that your board is set up correctly.'
           },
           {
             question: 'How many squares are on a chessboard?',
-            options: ['32', '48', '64', '100'],
-            correct: 2,
+            options: ['32', '48', '100', '64'],
+            correct: 3,
             explanation: 'The board has 8 files \u00d7 8 ranks = 64 squares, half light and half dark.'
           }
         ]
@@ -132,8 +132,8 @@ const LESSONS_EN = [
           },
           {
             question: 'How does a pawn capture?',
-            options: ['Straight ahead', 'Diagonally forward', 'In any direction', 'Backward only'],
-            correct: 1,
+            options: ['Diagonally forward', 'Straight ahead', 'In any direction', 'Backward only'],
+            correct: 0,
             explanation: 'The pawn moves straight forward but captures diagonally \u2014 one square forward-left or forward-right. This is one of the most commonly forgotten rules among beginners.'
           }
         ]
@@ -178,8 +178,8 @@ const LESSONS_EN = [
         quiz: [
           {
             question: 'What are the four central squares in chess?',
-            options: ['a1, a8, h1, h8', 'c3, c6, f3, f6', 'e4, d4, e5, d5', 'b2, b7, g2, g7'],
-            correct: 2,
+            options: ['a1, a8, h1, h8', 'e4, d4, e5, d5', 'c3, c6, f3, f6', 'b2, b7, g2, g7'],
+            correct: 1,
             explanation: 'e4, d4, e5, d5 are the true center of the board. Controlling them is the first objective in any chess game.'
           }
         ]
@@ -237,8 +237,8 @@ const LESSONS_EN = [
         quiz: [
           {
             question: 'Your opponent offers a trade: your rook for their knight. Should you accept?',
-            options: ['Yes \u2014 fair trade', 'No \u2014 the rook is stronger by 2 points', 'Yes \u2014 the knight is stronger because it jumps', 'No difference between them'],
-            correct: 1,
+            options: ['Yes \u2014 fair trade', 'No difference between them', 'Yes \u2014 the knight is stronger because it jumps', 'No \u2014 the rook is stronger by 2 points'],
+            correct: 3,
             explanation: 'The rook (5) is stronger than the knight (3) by 2 points. Accepting this trade means losing the exchange \u2014 a significant error in most positions.'
           }
         ]
@@ -287,12 +287,12 @@ const LESSONS_EN = [
           {
             question: 'What is the difference between checkmate and stalemate?',
             options: [
-              'No difference \u2014 both end the game',
               'Checkmate = king is in check with no escape (loss). Stalemate = king is not in check but has no legal move (draw)',
+              'No difference \u2014 both end the game',
               'Stalemate means winning and checkmate means drawing',
               'Checkmate is for White only and stalemate is for Black only'
             ],
-            correct: 1,
+            correct: 0,
             explanation: 'Checkmate = king is in check with no solution = loss. Stalemate = king is NOT in check but has no legal move = draw. Many games are ruined because players don\u2019t understand this distinction!'
           }
         ]
@@ -409,11 +409,11 @@ const LESSONS_EN = [
             question: 'In the Italian Game, why does the bishop go to c4?',
             options: [
               'Because it\u2019s the nearest available square',
-              'To target f7 (Black\u2019s weakest point) and prepare for castling',
               'To protect the e4 pawn',
+              'To target f7 (Black\u2019s weakest point) and prepare for castling',
               'To attack the knight on c6'
             ],
-            correct: 1,
+            correct: 2,
             explanation: 'The bishop on c4 aims at f7 \u2014 the weakest point in Black\u2019s camp because it\u2019s protected only by the king. Bringing the bishop out also prepares for kingside castling.'
           }
         ]
@@ -476,11 +476,11 @@ const LESSONS_EN = [
             question: 'In the London System, why must you bring the bishop to f4 before playing e3?',
             options: [
               'Because the bishop is stronger on f4',
-              'Because e3 will trap the bishop behind the pawns and it won\u2019t be able to reach f4',
+              'No difference \u2014 you can play them in either order',
               'Because the knight needs the e3 square',
-              'No difference \u2014 you can play them in either order'
+              'Because e3 will trap the bishop behind the pawns and it won\u2019t be able to reach f4'
             ],
-            correct: 1,
+            correct: 3,
             explanation: 'If you play e3 first, the e3 pawn blocks the diagonal and the bishop cannot escape from c1 to f4. Therefore Bf4 before e3 is the golden rule of the London System.'
           }
         ]
@@ -536,12 +536,12 @@ const LESSONS_EN = [
           {
             question: 'Why does Black play 1...c5 (Sicilian) instead of 1...e5 against 1.e4?',
             options: [
-              'Because c5 protects the king',
               'Because c5 attacks the center from the flank and prevents easy d4',
+              'Because c5 protects the king',
               'Because e5 is a bad move',
               'Because c5 develops the queen'
             ],
-            correct: 1,
+            correct: 0,
             explanation: 'The Sicilian (c5) attacks the d4 square from the flank. If White plays d4, Black captures with cxd4 and gains a central pawn in exchange for a flank pawn \u2014 a strategic edge. It also creates an asymmetrical, richer game.'
           }
         ]
@@ -604,11 +604,11 @@ const LESSONS_EN = [
             question: 'Your opponent plays 1.e4 e5 2.Qh5 Nc6 3.Bc4. What\u2019s the best defense?',
             options: [
               'Nf6 to attack the queen',
-              'g6 to chase the queen away and protect f7',
               'Ke7 to protect f7 with the king',
+              'g6 to chase the queen away and protect f7',
               'a6 to prevent castling'
             ],
-            correct: 1,
+            correct: 2,
             explanation: 'g6 chases the queen away, protects f7, and gains time. After g6 the queen is forced to retreat and Black gains a lead in development. Nf6 looks logical but allows Qxf7# checkmate!'
           }
         ]
@@ -755,11 +755,11 @@ const LESSONS_EN = [
             question: 'What is the difference between an absolute and a relative pin?',
             options: [
               'No difference',
-              'Absolute: the piece cannot legally move (king behind it). Relative: it can move but at a cost (valuable piece behind it)',
+              'Absolute is in the opening and relative is in the endgame',
               'Absolute is for rooks and relative is for bishops',
-              'Absolute is in the opening and relative is in the endgame'
+              'Absolute: the piece cannot legally move (king behind it). Relative: it can move but at a cost (valuable piece behind it)'
             ],
-            correct: 1,
+            correct: 3,
             explanation: 'In an absolute pin, the piece behind the pinned one is the king \u2014 so moving is illegal. In a relative pin, the piece behind is valuable (like the queen) \u2014 moving is legal but would cost major material.'
           }
         ]
@@ -876,12 +876,12 @@ const LESSONS_EN = [
           {
             question: 'What is the difference between a discovered attack and a discovered check?',
             options: [
-              'No difference',
-              'Discovered check is weaker',
               'In a discovered check, the unveiled piece attacks the king \u2014 so the opponent must deal with the check first',
+              'Discovered check is weaker',
+              'No difference',
               'A discovered attack requires a queen'
             ],
-            correct: 2,
+            correct: 0,
             explanation: 'In a discovered check, the check forces the opponent to defend immediately \u2014 giving the moving piece total freedom to capture whatever it wants. This makes discovered check much stronger than a regular discovered attack.'
           }
         ]
@@ -944,11 +944,11 @@ const LESSONS_EN = [
             question: 'What is the most important reason for a sacrifice in chess?',
             options: [
               'To scare the opponent',
-              'To get rid of a piece you don\u2019t need',
               'To gain checkmate or an advantage greater than the sacrificed piece',
+              'To get rid of a piece you don\u2019t need',
               'Because sacrifices look beautiful'
             ],
-            correct: 2,
+            correct: 1,
             explanation: 'A sacrifice is not an end in itself \u2014 the goal is to gain something of greater value. Checkmate is worth more than any piece, and an overwhelming attack may justify sacrificing a knight or bishop. But sacrificing without a clear reason is just losing material.'
           }
         ]
@@ -1074,11 +1074,11 @@ const LESSONS_EN = [
             question: 'What principle is shared by the fork, pin, skewer, and discovered attack?',
             options: [
               'They all require a queen',
-              'They all create two or more threats the opponent cannot handle simultaneously',
+              'They only happen in endgames',
               'They all depend on the knight',
-              'They only happen in endgames'
+              'They all create two or more threats the opponent cannot handle simultaneously'
             ],
-            correct: 1,
+            correct: 3,
             explanation: 'All tactics are based on the same principle: two threats are better than one. Fork = one piece attacks two targets. Pin = a piece is paralyzed and attacked. Skewer = two pieces on one line. Discovered attack = two threats from one move.'
           }
         ]
@@ -1145,12 +1145,12 @@ const LESSONS_EN = [
           {
             question: 'What is the first step in the thinking system before any move?',
             options: [
-              'Choose the best attacking move',
               'Check your opponent\u2019s threats',
+              'Choose the best attacking move',
               'Calculate 10 moves ahead',
               'Move the queen'
             ],
-            correct: 1,
+            correct: 0,
             explanation: 'The first step is always checking your opponent\u2019s threats. What good is a brilliant attacking move if your opponent is threatening checkmate that you overlooked? Safety first, then attack.'
           }
         ]
@@ -1262,12 +1262,12 @@ const LESSONS_EN = [
           {
             question: 'What is an isolated pawn?',
             options: [
-              'A pawn in the corner',
               'A pawn with no friendly pawn on either adjacent file',
+              'A pawn in the corner',
               'A pawn on the last rank',
               'A pawn protected by the king'
             ],
-            correct: 1,
+            correct: 0,
             explanation: 'An isolated pawn has no friendly pawns on neighboring files. This means it cannot be protected by another pawn \u2014 requiring piece defense, which ties down your pieces and makes the pawn a permanent target.'
           }
         ]
@@ -1327,11 +1327,11 @@ const LESSONS_EN = [
             question: 'Why is the knight the best piece for outposts?',
             options: [
               'Because it\u2019s the strongest piece',
-              'Because it doesn\u2019t need open lines and can\u2019t be chased by a pawn',
+              'Because it protects the king',
               'Because it moves quickly',
-              'Because it protects the king'
+              'Because it doesn\u2019t need open lines and can\u2019t be chased by a pawn'
             ],
-            correct: 1,
+            correct: 3,
             explanation: 'The knight doesn\u2019t need open diagonals or files (unlike the bishop and rook). And since an outpost by definition can\u2019t be attacked by an opposing pawn, the knight stays safe and effective. It\u2019s the "perfect tenant" for an outpost.'
           }
         ]
@@ -1432,7 +1432,7 @@ const LESSONS_EN = [
 <li>Guard outposts</li>
 </ul>
 `,
-        fen: '8/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/4K3 w - - 0 1',
+        fen: '4k3/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/4K3 w - - 0 1',
         highlights: ['e1', 'd3', 'd4'],
         arrows: [['e1','d2'],['d2','d3'],['d3','d4']],
         commonMistake: 'Beginners keep their king in the corner throughout the endgame \u2014 "because they\u2019re afraid for it." In the endgame, a hiding king = a wasted piece. You must overcome your fear and march the king toward the center immediately after the queens are traded. Timidity in the endgame loses games.',
@@ -1443,11 +1443,11 @@ const LESSONS_EN = [
             question: 'When should you start activating the king?',
             options: [
               'On the first move of the game',
-              'Immediately after the queens are traded or when entering the endgame',
               'Only when your king is completely alone',
+              'Immediately after the queens are traded or when entering the endgame',
               'In the opening'
             ],
-            correct: 1,
+            correct: 2,
             explanation: 'Once the queens are traded (or most heavy pieces disappear), the checkmate danger drops dramatically. That\u2019s the signal for king activation \u2014 march it immediately toward the center and toward the pawns.'
           }
         ]
@@ -1494,11 +1494,11 @@ const LESSONS_EN = [
             question: 'White pawn on c6, Black king on h7. Can the king catch the pawn?',
             options: [
               'Yes \u2014 the king is fast',
-              'No \u2014 the king is outside the promotion square',
+              'Cannot be determined',
               'Depends on White\u2019s move',
-              'Cannot be determined'
+              'No \u2014 the king is outside the promotion square'
             ],
-            correct: 1,
+            correct: 3,
             explanation: 'The pawn on c6 needs 2 moves to promote (c7-c8). The promotion square goes from c6 to c8 (2 squares) = a square with side 2 (c6-c8-e8-e6). The king on h7 is far outside this square and can\u2019t enter in one move \u2014 the pawn promotes!'
           }
         ]
@@ -1593,11 +1593,11 @@ const LESSONS_EN = [
             question: 'In the Lucena Position, where do you place your rook to build the bridge?',
             options: [
               'Right next to the king',
-              'On the 4th rank to act as a shield against the opponent\u2019s lateral checks',
               'Behind the pawn',
+              'On the 4th rank to act as a shield against the opponent\u2019s lateral checks',
               'In the corner'
             ],
-            correct: 1,
+            correct: 2,
             explanation: 'The rook on the 4th rank creates a "bridge" \u2014 a barrier that blocks the opponent\u2019s rook from giving lateral checks. This allows your king to emerge in front of the pawn and step away safely so the pawn can promote.'
           }
         ]
@@ -1697,12 +1697,12 @@ const LESSONS_EN = [
           {
             question: 'What is the strongest defensive weapon in queen endgames?',
             options: [
-              'Trading queens',
               'Perpetual check (draw by repetition)',
+              'Trading queens',
               'Attacking the opponent\u2019s pawns',
               'Centralizing the king'
             ],
-            correct: 1,
+            correct: 0,
             explanation: 'Perpetual check is the strongest drawing weapon in queen endgames. The queen can chase the king from every angle \u2014 and if the king can\u2019t hide, the result is a draw by repetition. This saves many "lost" positions.'
           }
         ]
@@ -1847,11 +1847,11 @@ const LESSONS_EN = [
             question: 'What is the correct order for learning chess?',
             options: [
               'Tactics \u2192 openings \u2192 fundamentals \u2192 endgames',
-              'Fundamentals \u2192 openings \u2192 tactics \u2192 full application',
+              'Memorize games \u2192 play tournaments \u2192 learn the rules',
               'Endgames \u2192 middlegame \u2192 openings \u2192 fundamentals',
-              'Memorize games \u2192 play tournaments \u2192 learn the rules'
+              'Fundamentals \u2192 openings \u2192 tactics \u2192 full application'
             ],
-            correct: 1,
+            correct: 3,
             explanation: 'The natural order: first understand the pieces and the board (fundamentals), then how to start a game (openings), then how to win material (tactics), then integrate everything (application). Each stage depends on the one before it.'
           }
         ]
@@ -1981,11 +1981,11 @@ const LESSONS_EN = [
             question: 'What is the first step in analyzing your game?',
             options: [
               'Open the engine immediately',
-              'Self-analysis \u2014 go through the game yourself first, before the engine',
               'Delete the game and forget about it',
+              'Self-analysis \u2014 go through the game yourself first, before the engine',
               'Share it with friends'
             ],
-            correct: 1,
+            correct: 2,
             explanation: 'Self-analysis first is crucial because it builds your own evaluation skills. If you jump straight to the engine, you won\u2019t learn to think independently. Try to identify your mistakes yourself first \u2014 then use the engine to verify and discover what you missed.'
           }
         ]
