@@ -1,7 +1,7 @@
 /**
  * Chess Academy - Main Application Engine
  * Renders lessons, handles navigation, quizzes, XP, streaks, progress, and paywall.
- * All text in Arabic. RTL layout. No external dependencies.
+ * Bilingual (AR/EN). RTL/LTR layout. No external dependencies.
  */
 
 (function () {
@@ -19,16 +19,265 @@
   const XP_CORRECT_QUIZ = 15;
   const XP_COMPLETE_PHASE = 100;
 
-  const LEVELS = [
-    { name: 'مبتدئ', min: 0 },
-    { name: 'هاوٍ', min: 100 },
-    { name: 'متقدم', min: 300 },
-    { name: 'خبير', min: 600 },
-  ];
-
   const PHASE_ICONS = ['♟', '♞', '♝', '♜', '♛', '♚'];
 
   const STREAK_MILESTONES = [7, 30, 60, 100, 365];
+
+  // ─── Translations ──────────────────────────────────────────────────────────
+
+  const I18N = {
+    ar: {
+      title: 'أكاديمية الشطرنج',
+      subtitle: 'تعلم الشطرنج خطوة بخطوة من البداية حتى الاحتراف',
+      phases: 'المراحل التعليمية',
+      phaseQuiz: 'اختبار المرحلة',
+      nextQuestion: 'السؤال التالي ←',
+      showResults: 'عرض النتائج ←',
+      nextPhase: 'المرحلة التالية ←',
+      settings: 'الإعدادات',
+      xpLabel: 'نقاط الخبرة',
+      overallProgress: 'التقدم الكلي',
+      resetProgress: 'إعادة تعيين التقدم',
+      resetConfirm: 'هل تريد حذف جميع بيانات التقدم؟ لا يمكن التراجع عن هذا.',
+      resetDone: 'تم إعادة تعيين التقدم',
+      wellDone: 'أحسنت! أكملت',
+      unlockAdvanced: 'افتح المراحل المتقدمة',
+      getFullAccess: 'احصل على الوصول الكامل لجميع المراحل والدروس والاختبارات',
+      paywall: 'اكتشف أسرار الشطرنج المتقدمة',
+      enterCode: 'لديك رمز وصول؟',
+      activate: 'تفعيل',
+      wrongCode: 'رمز غير صحيح',
+      buyNow: 'اشترِ الآن',
+      firstStep: 'الخطوة الأولى',
+      firstStepDesc: 'أكملت المرحلة الأولى',
+      master: 'الأستاذ',
+      masterDesc: 'أكملت جميع المراحل',
+      beginner: 'مبتدئ',
+      amateur: 'هاوٍ',
+      intermediate: 'متقدم',
+      expert: 'خبير',
+      noQuiz: 'لا يوجد اختبار لهذه المرحلة بعد',
+      back: 'رجوع',
+      correct: 'صحيح!',
+      wrong: 'خطأ',
+      home: 'الرئيسية',
+      consecutiveDays: 'أيام متتالية',
+      streakDays: 'يوم متتالي!',
+      streakKeepGoing: 'أحسنت! استمر في التعلم كل يوم',
+      streakContinue: 'متابعة',
+      saveFailed: 'فشل في حفظ التقدم',
+      phase: 'المرحلة',
+      lesson: 'درس',
+      lessonLabel: 'الدرس',
+      quiz: 'اختبار',
+      questions: 'أسئلة — اختبر فهمك',
+      backToPhases: 'العودة للمراحل',
+      backToPhase: 'العودة للمرحلة',
+      commonMistake: 'خطأ شائع',
+      analogy: 'تشبيه للتوضيح',
+      practice: 'تمرين تطبيقي',
+      importantTips: 'نصائح مهمة',
+      completedLesson: 'أكملت هذا الدرس',
+      completed: 'مكتمل',
+      prevLesson: 'الدرس السابق',
+      nextLesson: 'الدرس التالي',
+      prevStep: 'السابق',
+      nextStep: 'التالي',
+      correctAnswer: 'إجابة صحيحة!',
+      wrongAnswer: 'إجابة خاطئة — الصحيح:',
+      perfect: 'ممتاز! أداء مثالي!',
+      passed: 'أحسنت! اجتزت الاختبار بنجاح',
+      tryAgain: 'حاول مرة أخرى — المراجعة تصنع التميز',
+      reviewAnswers: 'مراجعة الإجابات',
+      yourAnswer: 'إجابتك:',
+      correctIs: 'الصحيح:',
+      retryQuiz: 'أعد المحاولة',
+      premiumContent: 'هذا المحتوى متاح للأعضاء المميزين فقط...',
+      discoverSecrets: 'اكتشف أسرار الشطرنج المتقدمة مع دروس حصرية...',
+      premiumMembership: 'العضوية المميزة',
+      feature1: '6 مراحل تعليمية كاملة',
+      feature2: 'أكثر من 50 درس تفاعلي',
+      feature3: 'اختبارات لكل مرحلة',
+      feature4: 'لوحات شطرنج تفاعلية',
+      feature5: 'تحديثات مجانية مدى الحياة',
+      or: 'أو',
+      enterAccessCode: 'لديك رمز الوصول؟',
+      enterCodePlaceholder: 'أدخل رمز الوصول',
+      verify: 'تحقق',
+      backToFreePhases: 'العودة للمراحل المجانية',
+      enterTheCode: 'أدخل رمز الوصول',
+      accessActivated: 'تم تفعيل الوصول الكامل! مرحبا بك',
+      wrongAccessCode: 'رمز الوصول غير صحيح',
+      newAchievements: 'إنجازات جديدة',
+      lessonsCompleted: 'درس مكتمل',
+      xpPoints: 'نقطة خبرة',
+      level: 'المستوى',
+      backToHome: 'العودة للرئيسية',
+      statistics: 'الإحصائيات',
+      consecutiveDaysLabel: 'أيام متتالية',
+      completedLessons: 'الدروس المكتملة',
+      access: 'الوصول',
+      fullAccess: 'كامل',
+      freeAccess: 'مجاني',
+      achievements: 'الإنجازات',
+      data: 'البيانات',
+      exportData: 'تصدير البيانات',
+      importDataLabel: 'استيراد البيانات',
+      importDataTitle: 'استيراد البيانات',
+      pasteJSON: 'الصق بيانات JSON هنا',
+      import: 'استيراد',
+      cancel: 'إلغاء',
+      activateFullAccess: 'تفعيل الوصول الكامل',
+      fullAccessActivated: 'تم تفعيل الوصول الكامل!',
+      exportSuccess: 'تم تصدير البيانات بنجاح',
+      importSuccess: 'تم استيراد البيانات بنجاح',
+      importFailed: 'فشل استيراد البيانات — تأكد من صحة الصيغة',
+      confirm: 'تأكيد',
+      deleteAll: 'نعم، احذف الكل',
+      dataNotFound: 'لم يتم العثور على البيانات',
+      dataNotFoundDesc: 'تأكد من تحميل ملف الدروس قبل تشغيل التطبيق.',
+      retry: 'إعادة المحاولة',
+      pageNotFound: 'الصفحة غير موجودة',
+      pageNotFoundDesc: 'الرابط الذي تبحث عنه غير موجود.',
+      appMissing: 'عنصر #app غير موجود',
+    },
+    en: {
+      title: 'Chess Academy',
+      subtitle: 'Learn chess step by step from beginner to confident player',
+      phases: 'Learning Phases',
+      phaseQuiz: 'Phase Quiz',
+      nextQuestion: 'Next Question →',
+      showResults: 'Show Results →',
+      nextPhase: 'Next Phase →',
+      settings: 'Settings',
+      xpLabel: 'Experience Points',
+      overallProgress: 'Overall Progress',
+      resetProgress: 'Reset Progress',
+      resetConfirm: 'Delete all progress data? This cannot be undone.',
+      resetDone: 'Progress has been reset',
+      wellDone: 'Well done! You completed',
+      unlockAdvanced: 'Unlock Advanced Phases',
+      getFullAccess: 'Get full access to all phases, lessons and quizzes',
+      paywall: 'Discover advanced chess secrets',
+      enterCode: 'Have an access code?',
+      activate: 'Activate',
+      wrongCode: 'Invalid code',
+      buyNow: 'Buy Now',
+      firstStep: 'First Step',
+      firstStepDesc: 'Completed the first phase',
+      master: 'Master',
+      masterDesc: 'Completed all phases',
+      beginner: 'Beginner',
+      amateur: 'Amateur',
+      intermediate: 'Intermediate',
+      expert: 'Expert',
+      noQuiz: 'No quiz available for this phase yet',
+      back: 'Back',
+      correct: 'Correct!',
+      wrong: 'Wrong',
+      home: 'Home',
+      consecutiveDays: 'Day streak',
+      streakDays: 'day streak!',
+      streakKeepGoing: 'Great job! Keep learning every day',
+      streakContinue: 'Continue',
+      saveFailed: 'Failed to save progress',
+      phase: 'Phase',
+      lesson: 'lesson',
+      lessonLabel: 'Lesson',
+      quiz: 'Quiz',
+      questions: 'questions — test your understanding',
+      backToPhases: 'Back to Phases',
+      backToPhase: 'Back to Phase',
+      commonMistake: 'Common Mistake',
+      analogy: 'Analogy',
+      practice: 'Practice Exercise',
+      importantTips: 'Important Tips',
+      completedLesson: 'I completed this lesson',
+      completed: 'Completed',
+      prevLesson: 'Previous Lesson',
+      nextLesson: 'Next Lesson',
+      prevStep: 'Previous',
+      nextStep: 'Next',
+      correctAnswer: 'Correct answer!',
+      wrongAnswer: 'Wrong answer — correct is:',
+      perfect: 'Excellent! Perfect score!',
+      passed: 'Well done! You passed the quiz',
+      tryAgain: 'Try again — review makes perfect',
+      reviewAnswers: 'Review Answers',
+      yourAnswer: 'Your answer:',
+      correctIs: 'Correct:',
+      retryQuiz: 'Retry',
+      premiumContent: 'This content is available for premium members only...',
+      discoverSecrets: 'Discover advanced chess secrets with exclusive lessons...',
+      premiumMembership: 'Premium Membership',
+      feature1: '6 complete learning phases',
+      feature2: 'Over 50 interactive lessons',
+      feature3: 'Quizzes for every phase',
+      feature4: 'Interactive chess boards',
+      feature5: 'Free lifetime updates',
+      or: 'or',
+      enterAccessCode: 'Have an access code?',
+      enterCodePlaceholder: 'Enter access code',
+      verify: 'Verify',
+      backToFreePhases: 'Back to free phases',
+      enterTheCode: 'Enter access code',
+      accessActivated: 'Full access activated! Welcome',
+      wrongAccessCode: 'Invalid access code',
+      newAchievements: 'New Achievements',
+      lessonsCompleted: 'lessons completed',
+      xpPoints: 'experience points',
+      level: 'Level',
+      backToHome: 'Back to Home',
+      statistics: 'Statistics',
+      consecutiveDaysLabel: 'Day streak',
+      completedLessons: 'Completed Lessons',
+      access: 'Access',
+      fullAccess: 'Full',
+      freeAccess: 'Free',
+      achievements: 'Achievements',
+      data: 'Data',
+      exportData: 'Export Data',
+      importDataLabel: 'Import Data',
+      importDataTitle: 'Import Data',
+      pasteJSON: 'Paste JSON data here',
+      import: 'Import',
+      cancel: 'Cancel',
+      activateFullAccess: 'Activate Full Access',
+      fullAccessActivated: 'Full access activated!',
+      exportSuccess: 'Data exported successfully',
+      importSuccess: 'Data imported successfully',
+      importFailed: 'Import failed — check the format',
+      confirm: 'Confirm',
+      deleteAll: 'Yes, delete all',
+      dataNotFound: 'Data not found',
+      dataNotFoundDesc: 'Make sure the lessons file is loaded before running the app.',
+      retry: 'Retry',
+      pageNotFound: 'Page not found',
+      pageNotFoundDesc: 'The link you are looking for does not exist.',
+      appMissing: '#app element not found',
+    }
+  };
+
+  function detectLang() {
+    if (typeof LESSONS_EN !== 'undefined') return 'en';
+    return 'ar';
+  }
+  const LANG = detectLang();
+  const T = I18N[LANG];
+
+  const LEVELS = [
+    { name: T.beginner, min: 0 },
+    { name: T.amateur, min: 100 },
+    { name: T.intermediate, min: 300 },
+    { name: T.expert, min: 600 },
+  ];
+
+  // ─── LTR Override for English ───────────────────────────────────────────────
+
+  if (LANG === 'en') {
+    document.body.style.direction = 'ltr';
+    document.body.style.textAlign = 'left';
+  }
 
   // ─── Storage Layer ───────────────────────────────────────────────────────────
 
@@ -62,7 +311,7 @@
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
       } catch {
-        console.error('فشل في حفظ التقدم');
+        console.error(T.saveFailed);
       }
     },
 
@@ -164,9 +413,9 @@
     overlay.innerHTML = `
       <div class="streak-celebration-content">
         <div class="streak-fire-big">🔥</div>
-        <h2>${days} يوم متتالي!</h2>
-        <p>أحسنت! استمر في التعلم كل يوم</p>
-        <button onclick="this.parentElement.parentElement.remove()">متابعة</button>
+        <h2>${days} ${T.streakDays}</h2>
+        <p>${T.streakKeepGoing}</p>
+        <button onclick="this.parentElement.parentElement.remove()">${T.streakContinue}</button>
       </div>
     `;
     document.body.appendChild(overlay);
@@ -323,13 +572,13 @@
     return `
       <header class="app-header">
         <div class="header-right">
-          <button class="header-btn home-btn" onclick="App.navigate('/')" title="الرئيسية">
+          <button class="header-btn home-btn" onclick="App.navigate('/')" title="${T.home}">
             <span class="icon">♚</span>
-            <span class="header-title">أكاديمية الشطرنج</span>
+            <span class="header-title">${T.title}</span>
           </button>
         </div>
         <div class="header-center">
-          <div class="progress-bar-container" title="التقدم الكلي: ${overall}%">
+          <div class="progress-bar-container" title="${T.overallProgress}: ${overall}%">
             <div class="progress-bar" style="width: ${overall}%"></div>
             <span class="progress-text">${overall}%</span>
           </div>
@@ -340,11 +589,11 @@
             <span class="stat-value">${progress.xp || 0}</span>
             <span class="stat-label">${level.name}</span>
           </div>
-          <div class="header-stat streak-display" title="أيام متتالية">
+          <div class="header-stat streak-display" title="${T.consecutiveDays}">
             <span class="stat-icon">🔥</span>
             <span class="stat-value">${progress.streak || 0}</span>
           </div>
-          <button class="header-btn settings-btn" onclick="App.navigate('/settings')" title="الإعدادات">
+          <button class="header-btn settings-btn" onclick="App.navigate('/settings')" title="${T.settings}">
             <span class="icon">⚙</span>
           </button>
         </div>
@@ -387,11 +636,11 @@
              onkeydown="if(event.key==='Enter')this.click()">
           <div class="phase-icon">${locked ? '🔒' : icon}</div>
           <div class="phase-info">
-            <h3 class="phase-title">${phase.title || `المرحلة ${i + 1}`}</h3>
+            <h3 class="phase-title">${phase.title || `${T.phase} ${i + 1}`}</h3>
             <p class="phase-desc">${phase.description || ''}</p>
             <div class="phase-meta">
-              <span class="concept-count">${completedCount}/${conceptCount} درس</span>
-              ${phase.quiz ? '<span class="quiz-badge">اختبار</span>' : ''}
+              <span class="concept-count">${completedCount}/${conceptCount} ${T.lesson}</span>
+              ${phase.quiz ? `<span class="quiz-badge">${T.quiz}</span>` : ''}
             </div>
             <div class="phase-progress-bar">
               <div class="phase-progress-fill" style="width: ${prog}%"></div>
@@ -405,8 +654,8 @@
     return `
       <div class="phase-list">
         <div class="section-header">
-          <h2>المراحل التعليمية</h2>
-          <p>تعلم الشطرنج خطوة بخطوة من البداية حتى الاحتراف</p>
+          <h2>${T.phases}</h2>
+          <p>${T.subtitle}</p>
         </div>
         <div class="phases-grid">
           ${phasesHTML}
@@ -442,10 +691,10 @@
              onkeydown="if(event.key==='Enter')this.click()">
           <div class="concept-number">${completed ? '✓' : i + 1}</div>
           <div class="concept-info">
-            <h4 class="concept-title">${concept.title || `الدرس ${i + 1}`}</h4>
+            <h4 class="concept-title">${concept.title || `${T.lessonLabel} ${i + 1}`}</h4>
             ${concept.subtitle ? `<p class="concept-subtitle">${concept.subtitle}</p>` : ''}
           </div>
-          <div class="concept-arrow">←</div>
+          <div class="concept-arrow">${LANG === 'ar' ? '←' : '→'}</div>
         </div>
       `;
     }
@@ -457,9 +706,9 @@
       <div class="concept-list">
         <div class="section-header">
           <button class="back-btn" onclick="App.navigate('/')">
-            <span>→</span> العودة للمراحل
+            <span>${LANG === 'ar' ? '→' : '←'}</span> ${T.backToPhases}
           </button>
-          <h2>${PHASE_ICONS[phaseIndex] || '♟'} ${phase.title || `المرحلة ${phaseIndex + 1}`}</h2>
+          <h2>${PHASE_ICONS[phaseIndex] || '♟'} ${phase.title || `${T.phase} ${phaseIndex + 1}`}</h2>
           <p>${phase.description || ''}</p>
           <div class="phase-progress-bar large">
             <div class="phase-progress-fill" style="width: ${phaseProgress}%"></div>
@@ -475,10 +724,10 @@
                onkeydown="if(event.key==='Enter')this.click()">
             <div class="quiz-icon">📝</div>
             <div class="quiz-info">
-              <h4>اختبار المرحلة</h4>
-              <p>${phase.quiz.length} أسئلة — اختبر فهمك</p>
+              <h4>${T.phaseQuiz}</h4>
+              <p>${phase.quiz.length} ${T.questions}</p>
             </div>
-            <div class="concept-arrow">←</div>
+            <div class="concept-arrow">${LANG === 'ar' ? '←' : '→'}</div>
           </div>
         ` : ''}
       </div>
@@ -527,9 +776,9 @@
         <div class="chess-sequence-wrapper">
           <div id="${seqId}" class="chess-board-container"></div>
           <div class="sequence-controls" id="${seqId}-controls">
-            <button onclick="App.sequencePrev('${seqId}')" class="seq-btn">→ السابق</button>
+            <button onclick="App.sequencePrev('${seqId}')" class="seq-btn">${LANG === 'ar' ? '→' : '←'} ${T.prevStep}</button>
             <span class="seq-counter" id="${seqId}-counter">1/${concept.sequence.length}</span>
-            <button onclick="App.sequenceNext('${seqId}')" class="seq-btn">التالي ←</button>
+            <button onclick="App.sequenceNext('${seqId}')" class="seq-btn">${T.nextStep} ${LANG === 'ar' ? '←' : '→'}</button>
           </div>
         </div>
       `;
@@ -542,7 +791,7 @@
         <div class="info-box mistake-box">
           <div class="info-box-header">
             <span class="info-box-icon">⚠️</span>
-            <span class="info-box-title">خطأ شائع</span>
+            <span class="info-box-title">${T.commonMistake}</span>
           </div>
           <div class="info-box-content">${concept.commonMistake}</div>
         </div>
@@ -555,7 +804,7 @@
         <div class="info-box analogy-box">
           <div class="info-box-header">
             <span class="info-box-icon">💡</span>
-            <span class="info-box-title">تشبيه للتوضيح</span>
+            <span class="info-box-title">${T.analogy}</span>
           </div>
           <div class="info-box-content">${concept.analogy}</div>
         </div>
@@ -568,7 +817,7 @@
         <div class="info-box practice-box">
           <div class="info-box-header">
             <span class="info-box-icon">🎯</span>
-            <span class="info-box-title">تمرين تطبيقي</span>
+            <span class="info-box-title">${T.practice}</span>
           </div>
           <div class="info-box-content">${concept.practice}</div>
         </div>
@@ -582,7 +831,7 @@
         <div class="info-box tips-box">
           <div class="info-box-header">
             <span class="info-box-icon">📌</span>
-            <span class="info-box-title">نصائح مهمة</span>
+            <span class="info-box-title">${T.importantTips}</span>
           </div>
           <ul class="tips-list">${tipItems}</ul>
         </div>
@@ -595,7 +844,7 @@
       <div class="concept-view">
         <div class="concept-nav-top">
           <button class="back-btn" onclick="App.navigate('/phase/${phaseIndex}')">
-            <span>→</span> ${phase.title || `المرحلة ${phaseIndex + 1}`}
+            <span>${LANG === 'ar' ? '→' : '←'}</span> ${phase.title || `${T.phase} ${phaseIndex + 1}`}
           </button>
           <span class="concept-counter">${conceptIndex + 1} / ${concepts.length}</span>
         </div>
@@ -620,10 +869,10 @@
           ${!completed ? `
             <button class="btn btn-primary btn-complete"
                     onclick="App.completeConcept(${phaseIndex}, ${conceptIndex})">
-              ✓ أكملت هذا الدرس
+              ✓ ${T.completedLesson}
             </button>
           ` : `
-            <div class="completed-badge">✓ مكتمل</div>
+            <div class="completed-badge">✓ ${T.completed}</div>
           `}
         </div>
 
@@ -631,18 +880,18 @@
           ${hasPrev ? `
             <button class="btn btn-secondary"
                     onclick="App.navigate('/phase/${phaseIndex}/concept/${conceptIndex - 1}')">
-              → الدرس السابق
+              ${LANG === 'ar' ? '→' : '←'} ${T.prevLesson}
             </button>
           ` : '<div></div>'}
           ${hasNext ? `
             <button class="btn btn-primary"
                     onclick="App.navigate('/phase/${phaseIndex}/concept/${conceptIndex + 1}')">
-              الدرس التالي ←
+              ${T.nextLesson} ${LANG === 'ar' ? '←' : '→'}
             </button>
           ` : `
             <button class="btn btn-primary"
                     onclick="App.navigate('/phase/${phaseIndex}')">
-              العودة للمرحلة ←
+              ${T.backToPhase} ${LANG === 'ar' ? '←' : '→'}
             </button>
           `}
         </div>
@@ -725,9 +974,9 @@
       return `
         <div class="quiz-empty">
           <button class="back-btn" onclick="App.navigate('/phase/${phaseIndex}')">
-            <span>→</span> العودة
+            <span>${LANG === 'ar' ? '→' : '←'}</span> ${T.back}
           </button>
-          <p>لا يوجد اختبار لهذه المرحلة بعد</p>
+          <p>${T.noQuiz}</p>
         </div>
       `;
     }
@@ -806,12 +1055,12 @@
         <div class="quiz-feedback ${isCorrect ? 'correct' : 'wrong'}">
           <div class="feedback-icon">${isCorrect ? '✓' : '✗'}</div>
           <div class="feedback-text">
-            ${isCorrect ? 'إجابة صحيحة!' : `إجابة خاطئة — الصحيح: ${q.options[q.correct]}`}
+            ${isCorrect ? T.correctAnswer : `${T.wrongAnswer} ${q.options[q.correct]}`}
             ${q.explanation ? `<p class="feedback-explanation">${q.explanation}</p>` : ''}
           </div>
         </div>
         <button class="btn btn-primary quiz-next-btn" onclick="App.nextQuestion()">
-          ${currentQuestion < total - 1 ? 'السؤال التالي ←' : 'عرض النتائج ←'}
+          ${currentQuestion < total - 1 ? T.nextQuestion : T.showResults}
         </button>
       `;
     }
@@ -820,7 +1069,7 @@
       <div class="quiz-view">
         <div class="quiz-header">
           <button class="back-btn" onclick="App.navigate('/phase/${phaseIndex}')">
-            <span>→</span> العودة
+            <span>${LANG === 'ar' ? '→' : '←'}</span> ${T.back}
           </button>
           <div class="quiz-progress">
             <span class="quiz-counter">${currentQuestion + 1} / ${total}</span>
@@ -894,13 +1143,13 @@
     let emoji, message;
     if (percentage === 100) {
       emoji = '🏆';
-      message = 'ممتاز! أداء مثالي!';
+      message = T.perfect;
     } else if (percentage >= 70) {
       emoji = '🎉';
-      message = 'أحسنت! اجتزت الاختبار بنجاح';
+      message = T.passed;
     } else {
       emoji = '💪';
-      message = 'حاول مرة أخرى — المراجعة تصنع التميز';
+      message = T.tryAgain;
     }
 
     const reviewHTML = answers.map((a, i) => {
@@ -910,8 +1159,8 @@
           <div class="review-indicator">${a.isCorrect ? '✓' : '✗'}</div>
           <div class="review-content">
             <p class="review-question">${q.question}</p>
-            <p class="review-answer">إجابتك: ${q.options[a.selected]}</p>
-            ${!a.isCorrect ? `<p class="review-correct">الصحيح: ${q.options[q.correct]}</p>` : ''}
+            <p class="review-answer">${T.yourAnswer} ${q.options[a.selected]}</p>
+            ${!a.isCorrect ? `<p class="review-correct">${T.correctIs} ${q.options[q.correct]}</p>` : ''}
           </div>
         </div>
       `;
@@ -935,22 +1184,22 @@
         </div>
 
         <div class="results-review">
-          <h3>مراجعة الإجابات</h3>
+          <h3>${T.reviewAnswers}</h3>
           ${reviewHTML}
         </div>
 
         <div class="results-actions">
           ${!passed ? `
             <button class="btn btn-primary" onclick="App.navigate('/phase/${phaseIndex}/quiz')">
-              أعد المحاولة
+              ${T.retryQuiz}
             </button>
           ` : ''}
           <button class="btn btn-secondary" onclick="App.navigate('/phase/${phaseIndex}')">
-            العودة للمرحلة
+            ${T.backToPhase}
           </button>
           ${passed && phaseIndex < (getLessons() || []).length - 1 ? `
             <button class="btn btn-primary" onclick="App.navigate('/phase/${phaseIndex + 1}')">
-              المرحلة التالية ←
+              ${T.nextPhase}
             </button>
           ` : ''}
         </div>
@@ -965,44 +1214,44 @@
       <div class="paywall">
         <div class="paywall-preview">
           <div class="preview-fade"></div>
-          <p>هذا المحتوى متاح للأعضاء المميزين فقط...</p>
-          <p>اكتشف أسرار الشطرنج المتقدمة مع دروس حصرية...</p>
+          <p>${T.premiumContent}</p>
+          <p>${T.discoverSecrets}</p>
         </div>
 
         <div class="paywall-card">
           <div class="paywall-icon">👑</div>
-          <h2>العضوية المميزة</h2>
-          <p class="paywall-desc">احصل على الوصول الكامل لجميع المراحل والدروس والاختبارات</p>
+          <h2>${T.premiumMembership}</h2>
+          <p class="paywall-desc">${T.getFullAccess}</p>
 
           <div class="paywall-features">
-            <div class="paywall-feature">✓ 6 مراحل تعليمية كاملة</div>
-            <div class="paywall-feature">✓ أكثر من 50 درس تفاعلي</div>
-            <div class="paywall-feature">✓ اختبارات لكل مرحلة</div>
-            <div class="paywall-feature">✓ لوحات شطرنج تفاعلية</div>
-            <div class="paywall-feature">✓ تحديثات مجانية مدى الحياة</div>
+            <div class="paywall-feature">✓ ${T.feature1}</div>
+            <div class="paywall-feature">✓ ${T.feature2}</div>
+            <div class="paywall-feature">✓ ${T.feature3}</div>
+            <div class="paywall-feature">✓ ${T.feature4}</div>
+            <div class="paywall-feature">✓ ${T.feature5}</div>
           </div>
 
           <a href="${GUMROAD_URL}" target="_blank" rel="noopener" class="btn btn-purchase">
-            شراء الآن
+            ${T.buyNow}
           </a>
 
           <div class="paywall-divider">
-            <span>أو</span>
+            <span>${T.or}</span>
           </div>
 
           <div class="access-code-form">
-            <label for="access-code">لديك رمز الوصول؟</label>
+            <label for="access-code">${T.enterAccessCode}</label>
             <div class="code-input-group">
-              <input type="text" id="access-code" placeholder="أدخل رمز الوصول"
+              <input type="text" id="access-code" placeholder="${T.enterCodePlaceholder}"
                      onkeydown="if(event.key==='Enter')App.verifyCode()">
-              <button class="btn btn-verify" onclick="App.verifyCode()">تحقق</button>
+              <button class="btn btn-verify" onclick="App.verifyCode()">${T.verify}</button>
             </div>
             <p id="code-error" class="code-error" style="display:none"></p>
           </div>
         </div>
 
         <button class="back-btn paywall-back" onclick="App.navigate('/')">
-          <span>→</span> العودة للمراحل المجانية
+          <span>${LANG === 'ar' ? '→' : '←'}</span> ${T.backToFreePhases}
         </button>
       </div>
     `;
@@ -1015,7 +1264,7 @@
 
     const code = input.value.trim();
     if (!code) {
-      errorEl.textContent = 'أدخل رمز الوصول';
+      errorEl.textContent = T.enterTheCode;
       errorEl.style.display = 'block';
       return;
     }
@@ -1027,11 +1276,11 @@
 
     if (valid) {
       Storage.grantAccess();
-      showToast('تم تفعيل الوصول الكامل! مرحبا بك', 'success');
+      showToast(T.accessActivated, 'success');
       launchConfetti();
       setTimeout(() => App.navigate('/'), 1500);
     } else {
-      errorEl.textContent = 'رمز الوصول غير صحيح';
+      errorEl.textContent = T.wrongAccessCode;
       errorEl.style.display = 'block';
       input.disabled = false;
       input.focus();
@@ -1050,8 +1299,8 @@
 
     // Achievement check
     const achievements = [];
-    if (phaseIndex === 0) achievements.push({ icon: '🏅', name: 'الخطوة الأولى', desc: 'أكملت المرحلة الأولى' });
-    if (phaseIndex === lessons.length - 1) achievements.push({ icon: '🏆', name: 'الأستاذ', desc: 'أكملت جميع المراحل' });
+    if (phaseIndex === 0) achievements.push({ icon: '🏅', name: T.firstStep, desc: T.firstStepDesc });
+    if (phaseIndex === lessons.length - 1) achievements.push({ icon: '🏆', name: T.master, desc: T.masterDesc });
 
     const progress = Storage.getProgress();
     for (const ach of achievements) {
@@ -1077,7 +1326,7 @@
       <div class="completion-view">
         <div class="completion-header">
           <div class="completion-icon">🎉</div>
-          <h2>أحسنت! أكملت ${phase.title || `المرحلة ${phaseIndex + 1}`}</h2>
+          <h2>${T.wellDone} ${phase.title || `${T.phase} ${phaseIndex + 1}`}</h2>
           <div class="xp-earned">
             <span class="xp-icon">⭐</span>
             <span>+${XP_COMPLETE_PHASE} XP</span>
@@ -1086,7 +1335,7 @@
 
         ${achievementsHTML ? `
           <div class="achievements-section">
-            <h3>إنجازات جديدة</h3>
+            <h3>${T.newAchievements}</h3>
             ${achievementsHTML}
           </div>
         ` : ''}
@@ -1094,15 +1343,15 @@
         <div class="completion-stats">
           <div class="stat-card">
             <div class="stat-number">${(phase.concepts || []).length}</div>
-            <div class="stat-name">درس مكتمل</div>
+            <div class="stat-name">${T.lessonsCompleted}</div>
           </div>
           <div class="stat-card">
             <div class="stat-number">${progress.xp}</div>
-            <div class="stat-name">نقطة خبرة</div>
+            <div class="stat-name">${T.xpPoints}</div>
           </div>
           <div class="stat-card">
             <div class="stat-number">${getLevel(progress.xp).name}</div>
-            <div class="stat-name">المستوى</div>
+            <div class="stat-name">${T.level}</div>
           </div>
         </div>
 
@@ -1110,16 +1359,16 @@
           ${hasNext && nextAccessible ? `
             <button class="btn btn-primary btn-large"
                     onclick="App.navigate('/phase/${phaseIndex + 1}')">
-              المرحلة التالية ←
+              ${T.nextPhase}
             </button>
           ` : hasNext ? `
             <button class="btn btn-primary btn-large"
                     onclick="App.navigate('/paywall')">
-              افتح المراحل المتقدمة 👑
+              ${T.unlockAdvanced} 👑
             </button>
           ` : ''}
           <button class="btn btn-secondary" onclick="App.navigate('/')">
-            العودة للرئيسية
+            ${T.backToHome}
           </button>
         </div>
       </div>
@@ -1136,44 +1385,44 @@
       <div class="settings-view">
         <div class="section-header">
           <button class="back-btn" onclick="App.navigate('/')">
-            <span>→</span> العودة
+            <span>${LANG === 'ar' ? '→' : '←'}</span> ${T.back}
           </button>
-          <h2>⚙ الإعدادات</h2>
+          <h2>⚙ ${T.settings}</h2>
         </div>
 
         <div class="settings-section">
-          <h3>الإحصائيات</h3>
+          <h3>${T.statistics}</h3>
           <div class="stats-grid">
             <div class="stat-item">
-              <span class="stat-label">نقاط الخبرة</span>
+              <span class="stat-label">${T.xpLabel}</span>
               <span class="stat-value">${progress.xp || 0} XP</span>
             </div>
             <div class="stat-item">
-              <span class="stat-label">المستوى</span>
+              <span class="stat-label">${T.level}</span>
               <span class="stat-value">${level.name}</span>
             </div>
             <div class="stat-item">
-              <span class="stat-label">أيام متتالية</span>
+              <span class="stat-label">${T.consecutiveDaysLabel}</span>
               <span class="stat-value">${progress.streak || 0} 🔥</span>
             </div>
             <div class="stat-item">
-              <span class="stat-label">الدروس المكتملة</span>
+              <span class="stat-label">${T.completedLessons}</span>
               <span class="stat-value">${progress.completedConcepts.length}</span>
             </div>
             <div class="stat-item">
-              <span class="stat-label">التقدم الكلي</span>
+              <span class="stat-label">${T.overallProgress}</span>
               <span class="stat-value">${getOverallProgress()}%</span>
             </div>
             <div class="stat-item">
-              <span class="stat-label">الوصول</span>
-              <span class="stat-value">${progress.access ? 'كامل 👑' : 'مجاني'}</span>
+              <span class="stat-label">${T.access}</span>
+              <span class="stat-value">${progress.access ? T.fullAccess + ' 👑' : T.freeAccess}</span>
             </div>
           </div>
         </div>
 
         ${progress.achievements.length > 0 ? `
           <div class="settings-section">
-            <h3>الإنجازات</h3>
+            <h3>${T.achievements}</h3>
             <div class="achievements-list">
               ${progress.achievements.map(a => `<span class="achievement-tag">${a}</span>`).join('')}
             </div>
@@ -1181,36 +1430,36 @@
         ` : ''}
 
         <div class="settings-section">
-          <h3>البيانات</h3>
+          <h3>${T.data}</h3>
           <div class="settings-actions">
             <button class="btn btn-secondary" onclick="App.exportData()">
-              📤 تصدير البيانات
+              📤 ${T.exportData}
             </button>
             <button class="btn btn-secondary" onclick="App.showImportDialog()">
-              📥 استيراد البيانات
+              📥 ${T.importDataLabel}
             </button>
             <button class="btn btn-danger" onclick="App.confirmReset()">
-              🗑 إعادة تعيين التقدم
+              🗑 ${T.resetProgress}
             </button>
           </div>
         </div>
 
         <div id="import-dialog" class="import-dialog" style="display:none">
-          <h4>استيراد البيانات</h4>
-          <textarea id="import-data" placeholder="الصق بيانات JSON هنا" rows="6"></textarea>
+          <h4>${T.importDataTitle}</h4>
+          <textarea id="import-data" placeholder="${T.pasteJSON}" rows="6"></textarea>
           <div class="dialog-actions">
-            <button class="btn btn-primary" onclick="App.importData()">استيراد</button>
-            <button class="btn btn-secondary" onclick="document.getElementById('import-dialog').style.display='none'">إلغاء</button>
+            <button class="btn btn-primary" onclick="App.importData()">${T.import}</button>
+            <button class="btn btn-secondary" onclick="document.getElementById('import-dialog').style.display='none'">${T.cancel}</button>
           </div>
         </div>
 
         ${!progress.access ? `
           <div class="settings-section">
-            <h3>تفعيل الوصول الكامل</h3>
+            <h3>${T.activateFullAccess}</h3>
             <div class="code-input-group">
-              <input type="text" id="settings-access-code" placeholder="أدخل رمز الوصول"
+              <input type="text" id="settings-access-code" placeholder="${T.enterCodePlaceholder}"
                      onkeydown="if(event.key==='Enter')App.verifySettingsCode()">
-              <button class="btn btn-verify" onclick="App.verifySettingsCode()">تحقق</button>
+              <button class="btn btn-verify" onclick="App.verifySettingsCode()">${T.verify}</button>
             </div>
             <p id="settings-code-error" class="code-error" style="display:none"></p>
           </div>
@@ -1228,7 +1477,7 @@
     a.download = 'chess-academy-progress.json';
     a.click();
     URL.revokeObjectURL(url);
-    showToast('تم تصدير البيانات بنجاح', 'success');
+    showToast(T.exportSuccess, 'success');
   }
 
   function showImportDialog() {
@@ -1242,10 +1491,10 @@
 
     const success = Storage.importData(textarea.value);
     if (success) {
-      showToast('تم استيراد البيانات بنجاح', 'success');
+      showToast(T.importSuccess, 'success');
       App.navigate('/settings');
     } else {
-      showToast('فشل استيراد البيانات — تأكد من صحة الصيغة', 'error');
+      showToast(T.importFailed, 'error');
     }
   }
 
@@ -1254,11 +1503,11 @@
     overlay.className = 'confirm-overlay';
     overlay.innerHTML = `
       <div class="confirm-dialog">
-        <h3>⚠️ تأكيد</h3>
-        <p>هل تريد حذف جميع بيانات التقدم؟ لا يمكن التراجع عن هذا.</p>
+        <h3>⚠️ ${T.confirm}</h3>
+        <p>${T.resetConfirm}</p>
         <div class="dialog-actions">
-          <button class="btn btn-danger" onclick="App.doReset()">نعم، احذف الكل</button>
-          <button class="btn btn-secondary" onclick="this.closest('.confirm-overlay').remove()">إلغاء</button>
+          <button class="btn btn-danger" onclick="App.doReset()">${T.deleteAll}</button>
+          <button class="btn btn-secondary" onclick="this.closest('.confirm-overlay').remove()">${T.cancel}</button>
         </div>
       </div>
     `;
@@ -1268,7 +1517,7 @@
   function doReset() {
     Storage.resetProgress();
     document.querySelector('.confirm-overlay')?.remove();
-    showToast('تم إعادة تعيين التقدم', 'info');
+    showToast(T.resetDone, 'info');
     App.navigate('/');
   }
 
@@ -1279,7 +1528,7 @@
 
     const code = input.value.trim();
     if (!code) {
-      errorEl.textContent = 'أدخل رمز الوصول';
+      errorEl.textContent = T.enterTheCode;
       errorEl.style.display = 'block';
       return;
     }
@@ -1287,11 +1536,11 @@
     const valid = await verifyAccessCode(code);
     if (valid) {
       Storage.grantAccess();
-      showToast('تم تفعيل الوصول الكامل!', 'success');
+      showToast(T.fullAccessActivated, 'success');
       launchConfetti();
       setTimeout(() => App.navigate('/settings'), 1000);
     } else {
-      errorEl.textContent = 'رمز غير صحيح';
+      errorEl.textContent = T.wrongCode;
       errorEl.style.display = 'block';
     }
   }
@@ -1302,9 +1551,9 @@
     return `
       <div class="error-view">
         <div class="error-icon">⚠️</div>
-        <h2>لم يتم العثور على البيانات</h2>
-        <p>تأكد من تحميل ملف الدروس <code>lessons-ar.js</code> قبل تشغيل التطبيق.</p>
-        <button class="btn btn-primary" onclick="location.reload()">إعادة المحاولة</button>
+        <h2>${T.dataNotFound}</h2>
+        <p>${T.dataNotFoundDesc}</p>
+        <button class="btn btn-primary" onclick="location.reload()">${T.retry}</button>
       </div>
     `;
   }
@@ -1313,9 +1562,9 @@
     return `
       <div class="error-view">
         <div class="error-icon">🔍</div>
-        <h2>الصفحة غير موجودة</h2>
-        <p>الرابط الذي تبحث عنه غير موجود.</p>
-        <button class="btn btn-primary" onclick="App.navigate('/')">العودة للرئيسية</button>
+        <h2>${T.pageNotFound}</h2>
+        <p>${T.pageNotFoundDesc}</p>
+        <button class="btn btn-primary" onclick="App.navigate('/')">${T.backToHome}</button>
       </div>
     `;
   }
@@ -1572,7 +1821,7 @@
         font-family: var(--font);
         background: var(--bg);
         color: var(--text);
-        direction: rtl;
+        direction: ${LANG === 'ar' ? 'rtl' : 'ltr'};
         line-height: 1.6;
         -webkit-font-smoothing: antialiased;
       }
@@ -1811,7 +2060,7 @@
 
       .phase-progress-bar .progress-text {
         position: absolute;
-        right: 0;
+        ${LANG === 'ar' ? 'right' : 'left'}: 0;
         top: -18px;
         font-size: 12px;
         font-weight: 600;
@@ -1863,7 +2112,7 @@
       }
 
       .concept-card.completed {
-        border-right: 3px solid var(--success);
+        ${LANG === 'ar' ? 'border-right' : 'border-left'}: 3px solid var(--success);
       }
 
       .concept-number {
@@ -2219,7 +2468,7 @@
       .quiz-option {
         display: block;
         width: 100%;
-        text-align: right;
+        text-align: ${LANG === 'ar' ? 'right' : 'left'};
         padding: 14px 16px;
         background: var(--bg);
         border: 2px solid var(--border);
@@ -2330,7 +2579,7 @@
       }
 
       .results-review {
-        text-align: right;
+        text-align: ${LANG === 'ar' ? 'right' : 'left'};
         margin-bottom: 24px;
       }
 
@@ -2416,7 +2665,7 @@
       }
 
       .paywall-features {
-        text-align: right;
+        text-align: ${LANG === 'ar' ? 'right' : 'left'};
         margin-bottom: 24px;
       }
 
@@ -2508,7 +2757,7 @@
 
       .achievements-section {
         margin: 24px 0;
-        text-align: right;
+        text-align: ${LANG === 'ar' ? 'right' : 'left'};
       }
 
       .achievements-section h3 {
@@ -2903,7 +3152,7 @@
 
     const appEl = document.getElementById('app');
     if (!appEl) {
-      console.error('عنصر #app غير موجود');
+      console.error(T.appMissing);
       return;
     }
 
