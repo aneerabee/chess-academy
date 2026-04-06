@@ -1,0 +1,224 @@
+/* Chess Board Component — Chess Academy */
+
+.chess-board-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  max-width: 560px;
+  border: 2px solid rgba(212, 168, 67, 0.3);
+  border-radius: 8px;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  background: #2a2015;
+}
+
+.chess-board-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%; /* 1:1 aspect ratio */
+}
+
+.chess-board-grid {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+}
+
+.chess-square {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0;
+}
+
+.chess-square--light {
+  background-color: #e8d5b5;
+}
+
+.chess-square--dark {
+  background-color: #b58863;
+}
+
+/* Highlight overlays */
+.chess-square--highlight-green::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(34, 197, 94, 0.4);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.chess-square--highlight-red::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(239, 68, 68, 0.4);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.chess-square--highlight-yellow::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(250, 204, 21, 0.35);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.chess-square--highlight-blue::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(59, 130, 246, 0.35);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Piece styling */
+.chess-piece {
+  position: relative;
+  z-index: 2;
+  line-height: 1;
+  text-align: center;
+  pointer-events: none;
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.3),
+    0 0 1px rgba(0, 0, 0, 0.2);
+  transition: opacity 0.15s ease;
+}
+
+.chess-piece--white {
+  color: #fff;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.5));
+}
+
+.chess-piece--black {
+  color: #1a1a1a;
+  filter: drop-shadow(0 1px 1px rgba(255, 255, 255, 0.15));
+}
+
+/* Coordinate labels */
+.chess-coord {
+  position: absolute;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 600;
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0.55;
+}
+
+.chess-coord--file {
+  bottom: 1px;
+  right: 3px;
+  font-size: clamp(7px, 1.4vw, 11px);
+}
+
+.chess-coord--rank {
+  top: 1px;
+  left: 3px;
+  font-size: clamp(7px, 1.4vw, 11px);
+}
+
+.chess-coord--on-light {
+  color: #b58863;
+}
+
+.chess-coord--on-dark {
+  color: #e8d5b5;
+}
+
+/* SVG arrow overlay */
+.chess-arrow-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.chess-arrow-line {
+  stroke-linecap: round;
+}
+
+/* Step-through controls */
+.chess-sequence-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 560px;
+}
+
+.chess-sequence-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 12px;
+  background: #2a2015;
+  border: 2px solid rgba(212, 168, 67, 0.3);
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+}
+
+.chess-sequence-wrapper > .chess-board-wrapper {
+  border-radius: 8px 8px 0 0;
+  border-bottom: none;
+}
+
+.chess-seq-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(212, 168, 67, 0.4);
+  border-radius: 6px;
+  background: rgba(212, 168, 67, 0.1);
+  color: #d4a843;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+  touch-action: manipulation;
+}
+
+.chess-seq-btn:hover:not(:disabled) {
+  background: rgba(212, 168, 67, 0.25);
+  border-color: rgba(212, 168, 67, 0.6);
+}
+
+.chess-seq-btn:active:not(:disabled) {
+  background: rgba(212, 168, 67, 0.35);
+}
+
+.chess-seq-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.chess-seq-caption {
+  flex: 1;
+  text-align: center;
+  color: #d4a843;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+  min-height: 20px;
+  direction: ltr;
+}
+
+.chess-seq-counter {
+  color: rgba(212, 168, 67, 0.6);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 12px;
+  white-space: nowrap;
+}
